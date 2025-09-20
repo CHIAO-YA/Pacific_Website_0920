@@ -1,0 +1,22 @@
+[
+  {
+    "name": "陶板屋",
+    "desc": "嚴選食材的和風創意套餐，細膩的前菜與主餐節奏，饗宴級體驗。",
+    "floor": "二館 4F",
+    "tel": "08-7661127",
+    "logo": "/images/brand/2.png",
+    "menuUrl": "https://tinyurl.com/bfz3bvb6",
+    "reserveUrl": "https://tinyurl.com/bfz3bvb6",
+    "show": 1
+  },
+  {
+    "name": "涮乃葉",
+    "desc": "高品質日式涮涮鍋，自助蔬菜吧搭配多款湯底，溫暖又滿足。",
+    "floor": "二館 1F",
+    "tel": "08-7661127",
+    "logo": "/images/brand/3.png",
+    "menuUrl": "",
+    "reserveUrl": "https://tinyurl.com/aznk24b7",
+    "show": 1
+  }
+]

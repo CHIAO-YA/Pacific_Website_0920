@@ -1,0 +1,226 @@
+/* /css/brands.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.brands {
+    padding: 3rem 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FF8C42;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #FF8C42;
+    margin: 0.5rem auto;
+}
+
+/* 位置篩選器樣式 */
+.location-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.location-btn {
+    padding: 0.5rem 1rem;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    color: #666;
+    font-weight: 500;
+}
+
+.location-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.location-btn.active {
+    background-color: #FF8C42;
+    color: white;
+}
+
+.brands-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.brand-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.brand-card:nth-child(1) { animation-delay: 0.1s; }
+.brand-card:nth-child(2) { animation-delay: 0.2s; }
+.brand-card:nth-child(3) { animation-delay: 0.3s; }
+.brand-card:nth-child(4) { animation-delay: 0.4s; }
+.brand-card:nth-child(5) { animation-delay: 0.5s; }
+.brand-card:nth-child(6) { animation-delay: 0.6s; }
+
+.brand-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.brand-logo {
+    flex: 0 0 150px;
+    margin-right: 1.5rem;
+}
+
+.brand-logo img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.brand-content {
+    flex: 1;
+}
+
+.brand-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.brand-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.brand-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.brand-meta i {
+    margin-right: 0.5rem;
+    color: #FF8C42;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #FF8C42;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin-right: 10px; /* Added margin between buttons */
+}
+
+.btn:last-child {
+    margin-right: 0; /* Remove margin from last button */
+}
+
+.btn:hover {
+    background-color: #e07b38;
+}
+
+/* 滑入動畫 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 淡入動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .brand-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .brand-logo {
+        margin-right: 0;
+        margin-bottom: 1rem;
+        flex: 0 0 auto;
+        width: 120px;
+    }
+
+    .brand-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .brand-content p {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        margin-right: 8px; /* Smaller margin on mobile */
+        margin-bottom: 8px; /* Add bottom margin for possible wrapping */
+    }
+    
+    .location-filter {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        justify-content: flex-start;
+    }
+    
+    .location-btn {
+        flex: 0 0 auto;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+}

@@ -1,0 +1,85 @@
+/* 整體設定 */
+.site-footer {
+  background-color: #333;
+  color: #ccc;
+  padding: 20px 0;
+  font-family: "Microsoft JhengHei", sans-serif;
+}
+
+.site-footer h3,
+.site-footer h4 {
+  color: #fff;
+  margin: 0;
+}
+
+/* 頁尾頂部 */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  border-bottom: 1px solid #555;
+}
+
+.footer-top .brand p {
+  font-size: 0.9rem;
+}
+
+.footer-top .social a {
+  color: #ccc;
+  font-size: 1.5rem;
+  margin-left: 15px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-top .social a:hover {
+  color: #fff;
+}
+
+/* 頁尾中部 */
+.footer-middle {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px 0;
+  border-bottom: 1px solid #555;
+}
+
+.footer-middle h4 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.footer-middle ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-middle li {
+  margin-bottom: 8px;
+}
+
+.footer-middle a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.footer-middle a:hover {
+  color: #fff;
+}
+
+/* 頁尾底部 */
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+.footer-bottom i {
+  margin-right: 5px;
+}

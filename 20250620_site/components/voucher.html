@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+ <script src="/js/header.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>屏東太平洋百貨 - 禮券購買</title>
+    <link rel="stylesheet" href="/css/voucher.css">
+	<link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <section class="voucher">
+        <div class="container">
+            <h2 class="section-title">禮券購買</h2>
+			
+            
+            <div class="voucher-content">
+                <!-- 購買禮券區塊 -->
+                <div class="voucher-card">
+                    <div class="voucher-info">
+                        <div class="voucher-image">
+                            <img src="/images/voucher.png" alt="禮券">
+                        </div>
+                        <div class="voucher-description">
+                            <h3>太平洋百貨禮券</h3>
+                            <p>送禮自用的最佳選擇！</p>
+                            <p class="price"><span>NT$</span>500<span>/本</span></p>
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus-btn" disabled>
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <div class="quantity">
+                                    <span id="quantity-value">0</span>
+                                    <span class="unit">本</span>
+                                </div>
+                                <button class="quantity-btn plus-btn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="total-price">
+                                總金額：<span id="total-price">NT$ 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 購買表單 -->
+                <div class="form-card">
+                    <h3 class="form-title">購買資訊</h3>
+                    <form id="voucher-form">
+                        <div class="form-group">
+                            <label for="buyer-name">購買人姓名 <span class="required">*</span></label>
+                            <input type="text" id="buyer-name" name="buyer-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="buyer-phone">購買人電話 <span class="required">*</span></label>
+                            <input type="tel" id="buyer-phone" name="buyer-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="organization">機關/組織 <span class="optional">(選填)</span></label>
+                            <input type="text" id="organization" name="organization">
+                        </div>
+                        <button type="submit" id="submit-btn" class="btn" disabled>送出</button>
+                    </form>
+                </div>
+
+                <!-- 注意事項 -->
+                <div class="notice-card">
+                    <h3 class="notice-title">禮券使用注意事項</h3>
+                    <ul class="notice-list">
+                        <li>禮券僅限於屏東太平洋百貨（本館、日光廣場、驛站商場）使用</li>
+                        <li>面額種類：100元券（500元/本、1000元/本）及500元券（5000元/本）</li>
+                        <li>可分次使用，但不兌換現金，不可抵繳簽帳費用</li>
+                        <li>剩餘金額以找零單方式退還，可再使用</li>
+                        <li>使用無時間限制，塗改無效，偽造依法追究</li>
+                        <li>已開立統一發票，可計入兌換停車券金額</li>
+                        <li>大宗購買享優惠，詳洽6F貴賓廳</li>
+                        <li>視同現金，遺失不補發</li>
+                        <li>已存入信託專戶，保障消費者權益</li>
+                    </ul>
+                    <div class="contact-info">
+                        諮詢專線：(08)732-5666#580~583（6F貴賓廳）
+                    </div>
+					<a href="/index.html" class="back-to-home">
+                            <i class="fas fa-arrow-left"></i> 返回首頁
+                        </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div id="order-popup" class="popup">
+        <div class="popup-content">
+            <h3>訂單確認</h3>
+            <p>我們已經接收到您的訂單：</p>
+            <p class="account-info">您的專屬匯款帳號為：<span id="account-number"></span></p>
+            <p>請於6小時內匯款，逾時帳號將失效</p>
+            <button id="confirm-btn" class="btn">確認</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const minusBtn = document.querySelector('.minus-btn');
+            const plusBtn = document.querySelector('.plus-btn');
+            const quantityValue = document.getElementById('quantity-value');
+            const totalPrice = document.getElementById('total-price');
+            const submitBtn = document.getElementById('submit-btn');
+            const form = document.getElementById('voucher-form');
+            const popup = document.getElementById('order-popup');
+            const confirmBtn = document.getElementById('confirm-btn');
+            const accountNumber = document.getElementById('account-number');
+            
+            let quantity = 0;
+            const unitPrice = 500;
+            
+            // 更新顯示和按鈕狀態
+            function updateDisplay() {
+                quantityValue.textContent = quantity;
+                totalPrice.textContent = `NT$ ${quantity * unitPrice}`;
+                checkFormValidity();
+            }
+            
+            // 檢查表單是否有效
+            function checkFormValidity() {
+                const buyerName = document.getElementById('buyer-name').value.trim();
+                const buyerPhone = document.getElementById('buyer-phone').value.trim();
+                submitBtn.disabled = quantity < 1 || !buyerName || !buyerPhone;
+            }
+            
+            // 增加數量
+            plusBtn.addEventListener('click', function() {
+                quantity += 1;
+                updateDisplay();
+            });
+            
+            // 減少數量
+            minusBtn.addEventListener('click', function() {
+                if (quantity > 0) {
+                    quantity -= 1;
+                    updateDisplay();
+                }
+            });
+            
+            // 表單輸入監聽
+            form.addEventListener('input', checkFormValidity);
+            
+            // 表單提交
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 生成隨機匯款帳號（10 位數字）
+                const randomAccount = Math.floor(1000000000 + Math.random() * 9000000000);
+                accountNumber.textContent = randomAccount;
+                
+                // 顯示 Popup
+                popup.style.display = 'flex';
+            });
+            
+            // 關閉 Popup
+            confirmBtn.addEventListener('click', function() {
+                popup.style.display = 'none';
+                // 重置表單和數量
+                form.reset();
+                quantity = 0;
+                updateDisplay();
+            });
+            
+            // 初始化顯示
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>

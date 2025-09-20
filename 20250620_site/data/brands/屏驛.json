@@ -1,0 +1,92 @@
+[
+  {
+    "name": "德州小騎士",
+    "desc": "道地美式漢堡與炸雞，多樣化口味選擇，份量十足超過癮。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7661127",
+    "logo": "/images/brand/5.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "馬德里",
+    "desc": "西班牙家常風味 X 海鮮燉飯與多款 Tapas，輕鬆分享的聚會選擇。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7559858",
+    "logo": "/images/brand/8.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "三商巧福",
+    "desc": "招牌紅燒牛肉麵、滷味小菜與熱湯，快速上桌、暖胃飽足。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7511971",
+    "logo": "/images/brand/10.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "斑鳩的窩",
+    "desc": "和風定食搭配酥香炸物與咖哩醬，日式家庭味的溫馨餐桌。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7513337",
+    "logo": "/images/brand/11.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "橫濱九田",
+    "desc": "濃郁豚骨湯頭與彈牙麵條，搭配叉燒與溏心蛋，一碗到位的拉麵魂。",
+    "floor": "屏東驛站 1F",
+    "tel": "",
+    "logo": "/images/brand/12.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "天擇",
+    "desc": "家常料理的溫度與火候，從便當主菜到熱湯小炒，簡單也能很講究。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7529981",
+    "logo": "/images/brand/13.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "韓食食堂",
+    "desc": "韓式拌飯、石鍋湯與炸雞，麻辣微甜的層次，讓人一口接一口。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7522058",
+    "logo": "/images/brand/14.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "丸龜製麵",
+    "desc": "現點現煮讚岐烏龍麵，搭配酥脆天婦羅與小菜，客製你的完美一碗。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7515169",
+    "logo": "/images/brand/15.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "滋滋小鉄板",
+    "desc": "鐵板現炒香氣四溢，肉品、蔬菜與麵食自由搭配，熱騰騰最對味。",
+    "floor": "屏東驛站 1F",
+    "tel": "08-7560007",
+    "logo": "/images/brand/16.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  }
+]

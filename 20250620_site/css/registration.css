@@ -1,0 +1,107 @@
+/* registration.css — 報名表專用（效能友善版，不用 backdrop-filter 全畫面模糊） */
+:root{
+  --accent:#FF8C42;
+  --ink:#333;
+  --muted:#888;
+  --border:#e6e6e6;
+  --field-bg:#f8f8f8;
+  --card:#fff;
+}
+
+/* 基本 Overlay 設定（如站上沒有 .modal 的通用樣式，這裡提供保險值） */
+#registration-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;                /* 由 aria-hidden 控制顯示 */
+}
+
+/* 顯示/隱藏控制（靠 aria-hidden） */
+#registration-modal[aria-hidden="true"]  { display: none; }
+#registration-modal[aria-hidden="false"] { display: block; }
+
+/* 半透明遮罩（不卡頓） */
+#registration-modal,
+#registration-modal.modal{
+  background: rgba(0,0,0,.45);
+  contain: layout paint style;  /* 限制重繪範圍，提升效能 */
+  will-change: opacity;
+}
+
+/* Dialog：輕量卡片（不做毛玻璃） */
+#registration-modal .modal-content{
+  position: relative;
+  background: rgba(255,255,255,.95);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.18);
+  padding: 22px;
+  max-width: 640px;
+  margin: 8vh auto;             /* 垂直置中留白 */
+  color: var(--ink);
+  transform: translateZ(0);
+}
+
+/* 關閉按鈕 */
+#registration-modal .close-btn{
+  position:absolute; top:10px; right:12px;
+  width:36px; height:36px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:#f0f0f0; color:#333; cursor:pointer; user-select:none;
+  border:1px solid #e6e6e6; font-weight:900;
+}
+#registration-modal .close-btn:hover{ background:#e9e9e9; }
+
+/* 兩欄：姓名 + 手機（小螢幕自動單欄） */
+#registration-modal .form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+#registration-modal .field{
+  display:flex; flex-direction:column; gap:6px;
+}
+#registration-modal label{
+  font-weight:700; color:var(--ink);
+}
+
+/* 欄位外觀（與站上風格一致） */
+#registration-modal input[type="text"],
+#registration-modal input[type="tel"],
+#registration-modal input[type="date"],
+#registration-modal select,
+#registration-modal textarea{
+  width:100%;
+  padding:.8rem .9rem;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--field-bg);
+  outline:none;
+  transition:border-color .18s ease, background .18s ease, box-shadow .18s ease;
+  font-size:1rem;
+  color:var(--ink);
+}
+#registration-modal input:focus,
+#registration-modal select:focus,
+#registration-modal textarea:focus{
+  border-color:var(--accent); background:#fff;
+  box-shadow:0 0 0 3px rgba(255,140,66,.15);
+}
+
+/* 驗證樣式與提示 */
+#registration-modal input:invalid{ border-color:#e5533d; }
+#registration-modal .hint{ color:var(--muted); font-size:.9rem; }
+
+/* 動作列 */
+#registration-modal .form-actions{
+  display:flex; gap:.6rem; justify-content:flex-start; margin-top:.4rem;
+}
+
+/* 鎖捲動（開啟 modal 時避免背景跳動） */
+body.modal-open{ position:fixed; width:100%; overflow:hidden; }
+
+/* 響應式：小螢幕單欄 */
+@media (max-width:640px){
+  #registration-modal .form-row{ grid-template-columns:1fr; }
+  #registration-modal .modal-content{ padding:18px; border-radius:14px; margin: 6vh 12px; }
+}

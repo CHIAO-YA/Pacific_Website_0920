@@ -1,0 +1,385 @@
+/* /css/voucher.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.voucher {
+    padding: 3rem 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FF8C42;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #FF8C42;
+    margin: 0.5rem auto;
+}
+
+.voucher-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.voucher-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* 增加陰影 */
+    border: 2px solid #FF8C42; /* 添加橙色邊框 */
+    overflow: hidden;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.voucher-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.voucher-image {
+    flex: 0 0 200px;
+}
+
+.voucher-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.voucher-description {
+    flex: 1;
+}
+
+.voucher-description h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+.voucher-description p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    color: #FF8C42 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.price span {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #FF8C42;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-btn:hover:not(:disabled) {
+    background-color: #e07b38;
+    transform: scale(1.05);
+}
+
+.quantity-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-width: 80px;
+    justify-content: center;
+}
+
+.unit {
+    font-size: 1rem;
+    margin-left: 0.3rem;
+    color: #666;
+}
+
+.total-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+#total-price {
+    font-weight: 700;
+    color: #FF8C42;
+}
+
+/* 表單樣式 */
+.form-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: 0.1s;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FF8C42;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #FF8C42;
+}
+
+.required {
+    color: #FF8C42;
+    font-size: 0.9rem;
+}
+
+.optional {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* 送出按鈕 */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: #FF8C42;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: #e07b38;
+}
+
+.btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 注意事項 */
+.notice-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.notice-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FF8C42;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.notice-list {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.notice-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.notice-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #FF8C42;
+    font-weight: bold;
+}
+
+.contact-info {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* Popup 樣式 */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.popup-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FF8C42;
+    margin-bottom: 1rem;
+}
+
+.popup-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.account-info {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.account-info span {
+    color: #FF8C42;
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .voucher-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .voucher-image {
+        flex: 0 0 auto;
+        width: 180px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .quantity-control {
+        justify-content: center;
+    }
+    
+    .voucher-description h3 {
+        font-size: 1.5rem;
+    }
+    
+    .form-title,
+    .notice-title {
+        font-size: 1.3rem;
+    }
+    
+    .notice-list li {
+        font-size: 0.9rem;
+    }
+}

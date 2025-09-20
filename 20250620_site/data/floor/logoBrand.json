@@ -1,0 +1,54 @@
+{
+  "total_brands": 500, // 總品牌數量
+  "last_updated": "2025-01-XX", // 最後更新日期
+  "brands": 
+  [
+    {
+      "id": "1F_001",
+      "card_name": "CLINIQUE",
+      "card_floor": "1F",
+      "cover_image": "/images/floor/CLINIQUE.jfif",
+      "building": "main", //分館
+      "floor": "1F", //篩選器
+      "phone": "07-3952673",
+      "description": "品牌介紹文字...",
+      "detail_images": [
+        "/images/floor/CLINIQUE.jfif",
+        "/images/floor/CLINIQUE.jfif"
+      ]
+    },
+    {
+      "id": "1F_002",
+      "card_name": "CLINIQUE",
+      "card_floor": "1F",
+      "cover_image": "/images/floor/CLINIQUE.jfif",
+      "building": "main", //分館
+      "floor": "1F", //篩選器
+      "phone": "07-3952673",
+      "description": "品牌介紹文字...",
+      "detail_images": [
+        "/images/floor/CLINIQUE.jfif",
+        "/images/floor/CLINIQUE.jfif"
+      ]
+    },
+    {
+      "id": "1F_003",
+      "card_name": "CLINIQUE",
+      "card_floor": "1F",
+      "cover_image": "/images/floor/CLINIQUE.jfif",
+      "building": "main", //分館
+      "floor": "1F", //篩選器
+      "phone": "07-3952673",
+      "description": "品牌介紹文字...",
+      "detail_images": [
+        "/images/floor/CLINIQUE.jfif",
+        "/images/floor/CLINIQUE.jfif"
+      ]
+    }
+
+
+
+
+    // 其他品牌資料...
+  ]
+}

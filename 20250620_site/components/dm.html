@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+ <script src="/js/header.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>屏東太平洋百貨線上DM</title>
+
+  <!-- 站內主題樣式 + 本頁樣式 -->
+  <link rel="stylesheet" href="/css/brands.css" />
+  <link rel="stylesheet" href="/css/dm.css" />
+  <link rel="stylesheet" href="/css/header.css">
+
+  <!-- jQuery & turn.js（如需內網，請改成本地 /js/turn.min.js） -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/blasten/turn.js@master/turn.min.js"></script>
+</head>
+<body>
+<div id="dm-app">
+  <div class="dm-header">
+    <h1 class="dm-title">屏東太平洋百貨線上DM</h1>
+  </div>
+
+  <!-- DM 列 + 回首頁（低調膠囊按鈕，樣式在 dm.css 的 .dm-home） -->
+  <div class="dm-tabs" role="tablist" aria-label="DM 選擇">
+    <button class="dm-tab" role="tab" aria-selected="true"  data-book="a">APP會員限定 吉時享樂</button>
+    <button class="dm-tab" role="tab" aria-selected="false" data-book="b">秋日收藏家</button>
+    <button class="dm-tab" role="tab" aria-selected="false" data-book="c">月來悅好 中秋團購</button>
+    <button class="dm-tab" role="tab" aria-selected="false" data-book="d">新鮮人初登場</button>
+    <button class="dm-tab" role="tab" aria-selected="false" data-book="e">婚禮專刊</button>
+    <a class="dm-home" href="/" id="btn-home">回首頁</a>
+  </div>
+
+  <div class="dm-shell">
+    <section class="dm-info" id="dm-info"></section>
+
+    <section class="dm-book-wrap">
+      <div id="dm-viewport" class="dm-book-viewport">
+        <button class="nav-btn nav-left" id="nav-left" aria-label="上一頁">‹</button>
+        <button class="nav-btn nav-right" id="nav-right" aria-label="下一頁">›</button>
+        <button class="nav-zoom" id="nav-zoom" aria-label="全螢幕">🔍</button>
+        <div id="dm-book"></div>
+      </div>
+      <div class="dm-dots" id="dm-dots"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* 圖片根目錄（依你的要求改為上層） */
+const BASE = "../images/dm/";
+
+/* 五本 DM 資料 */
+const books = {
+  a:{folder:"a",pages:[1,2,3,4,5],ext:"png",title:"APP會員限定 吉時享樂",period:"8/14(四)~9/9(二)",desc:[]},
+  b:{folder:"b",pages:[1,2,3,4,5],ext:"png",title:"秋日收藏家",period:"9/11(四)~9/30(二)",desc:[]},
+  c:{folder:"c",pages:[1,2],ext:"png",title:"月來悅好 中秋節美食團購",period:"",desc:[
+      "第一波預購時間: 8/22(五)~9/21(日)，取貨: 9/26(五)~9/28(日) 14:00~20:00",
+      "第二波預購時間: 9/22(一)~9/28(日)，取貨: 10/3(五)~10/6(一) 14:00~20:00",
+      "團購加碼贈：當日購買團購商品累計滿1000元，加贈吉利卡點數100點（每卡乙次）。",
+      "歡迎新朋友：首次下載 APP 並註冊成會員，贈餐飲電子券100元（每會員乙份；舊卡友歸戶不適用）。"
+  ]},
+  d:{folder:"d",pages:[1,2],ext:"png",title:"新鮮人初登場",period:"即日起~9/30(二)",desc:[
+      "專案洽小幫手：08-7325666#580。",
+      "持畢業證書（可影本）或企業識別證／名片，購買專刊不同櫃位任兩品且滿3000元，贈電子券100元；滿6000元贈200元，以此類推。",
+      "詳情以店內公告為主；遇特殊檔期回饋擇一。"
+  ]},
+  e:{folder:"e",pages:Array.from({length:18},(_,i)=>i+1),ext:"png",title:"婚禮專刊",period:"7/1(二)~9/30(二)",desc:[
+      "婚禮專案洽婚禮小秘書：08-7325666#580。",
+      "持結婚相關證件 + 當日購買專刊不同櫃位任兩品且滿20000元，贈婚禮祝賀金電子券1000元；滿40000元贈2000元（同一卡友限乙次）。",
+      "詳情以店內公告為主；遇特殊檔期回饋擇一。"
+  ]}
+};
+
+(function($){
+  let currentKey = "a";
+  const $book = $("#dm-book");
+  const $viewport = $("#dm-viewport");
+  const $dots = $("#dm-dots");
+  const $info = $("#dm-info");
+  let building = false; // 防止重入（resize/fullscreen/tabs 切換）
+
+  function buildInfo(key){
+    const b = books[key];
+    const lines = [`<h3>${b.title}</h3>`, b.period?`<p><strong>活動期間：</strong>${b.period}</p>`:""];
+    if (b.desc?.length){
+      lines.push("<hr style='border:none;border-top:1px dashed #ddd;margin:.5rem 0'/>");
+      b.desc.forEach(t=>lines.push(`<p>${t}</p>`));
+    }
+    $info.html(lines.join(""));
+  }
+
+  function buildDots(key){
+    const total = books[key].pages.length;
+    $dots.html("");
+    for(let i=1;i<=total;i++){
+      const dot=document.createElement("div");
+      dot.className="dm-dot";
+      dot.addEventListener("click",()=> safeGoPage(i));
+      $dots.append(dot);
+    }
+  }
+  function updateDots(key,pageIdx){
+    const total = books[key].pages.length;
+    const dots = $dots.children().toArray();
+    const idx = Math.min(Math.max((pageIdx|0)-1,0), total-1);
+    dots.forEach((el,i)=> el.classList.toggle("active", i===idx));
+  }
+
+  function buildBook(key){
+    if (building) return;
+    building = true;
+    if (!$.fn.turn){ alert("turn.js 載入失敗，請改用本地 /js/turn.min.js"); building=false; return; }
+
+    const b = books[key];
+    const pages = [...b.pages].sort((x,y)=>x-y);
+    const total = pages.length;
+
+    try{ if ($book.data("inited")) $book.turn("destroy"); }catch(e){}
+    $book.empty();
+
+    // 建立所有頁面
+    $book.html(pages.map(n=>{
+      const src = `${BASE}${b.folder}/${n}.${b.ext}`;
+      return `<div class="page"><img alt="p${n}" loading="lazy" src="${src}" onerror="this.style.opacity=.3"/></div>`;
+    }).join(""));
+
+    // 明確指定 pages 與初始 page，避免 "is not a page for range"
+    $book.turn({
+      width: $viewport.width(),
+      height: $viewport.height(),
+      display: "single",
+      pages: total,
+      page: 1,
+      autoCenter: true,
+      acceleration: true,
+      gradients: true,
+      elevation: 50,
+      when:{ turned:(_,page)=> updateDots(key,page) }
+    });
+    $book.data("inited", true);
+
+    buildDots(key);
+    updateDots(key, 1);
+
+    // 等 layout 完成再釘一次第 1 頁，避免初始化競態
+    requestAnimationFrame(()=>{ safeGoPage(1); building=false; });
+  }
+
+  function clampPage(p){
+    let total=1;
+    try{ total = $book.turn("pages")||1; }catch(e){ total=1; }
+    p = p|0; if (!p) p = 1;
+    return Math.min(Math.max(1,p), total);
+  }
+  function safeGoPage(n){
+    if (!$book.data("inited")) return;
+    try{ $book.turn("page", clampPage(n)); }catch(e){}
+  }
+  function next(){ if ($book.data("inited")) try{ $book.turn("next"); }catch(e){} }
+  function prev(){ if ($book.data("inited")) try{ $book.turn("previous"); }catch(e){} }
+  function first(){ safeGoPage(1); }
+
+  function redoLayout(){
+    if (building || !$book.data("inited")) return;
+    building = true;
+    let page = 1;
+    try{ page = clampPage($book.turn("page")); }catch(e){ page = 1; }
+    buildBook(currentKey);
+    requestAnimationFrame(()=>{ safeGoPage(page); building=false; });
+  }
+
+  function switchBook(key){
+    if (currentKey===key) return;
+    currentKey = key;
+    document.querySelectorAll(".dm-tab").forEach(el=> el.setAttribute("aria-selected", String(el.dataset.book===key)));
+    buildInfo(key);
+    buildBook(key);
+    first();
+  }
+
+  // 常駐左右導覽
+  $("#nav-left").on("click", prev);
+  $("#nav-right").on("click", next);
+
+  // 全螢幕切換
+  $("#nav-zoom").on("click", ()=>{
+    const el = $viewport.get(0);
+    if (!document.fullscreenElement){ el.requestFullscreen?.(); }
+    else{ document.exitFullscreen?.(); }
+  });
+  document.addEventListener("fullscreenchange", ()=> setTimeout(redoLayout, 60));
+
+  // 鍵盤 & 觸控
+  document.addEventListener("keydown", e=>{
+    if (["ArrowRight","PageDown"].includes(e.key)) next();
+    else if (["ArrowLeft","PageUp"].includes(e.key)) prev();
+    else if (e.key==="Home") first();
+  });
+  (function enableSwipe(){
+    let startX=0;
+    $viewport.on("touchstart", e=> startX = e.originalEvent.touches[0].clientX);
+    $viewport.on("touchend", e=>{
+      const endX = e.originalEvent.changedTouches[0].clientX;
+      const dx = endX - startX;
+      if (Math.abs(dx)>40) (dx<0 ? next() : prev());
+    });
+  })();
+
+  // Tabs
+  document.querySelectorAll(".dm-tab").forEach(btn=>{
+    btn.addEventListener("click", ()=> switchBook(btn.dataset.book));
+  });
+
+  // 初始化
+  $(function(){
+    buildInfo(currentKey);
+    buildBook(currentKey);
+    let t=null;
+    window.addEventListener("resize", ()=>{ clearTimeout(t); t=setTimeout(redoLayout, 200); });
+  });
+
+})(jQuery);
+</script>
+</body>
+</html>

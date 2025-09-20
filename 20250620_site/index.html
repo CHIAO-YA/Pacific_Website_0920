@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>屏東太平洋百貨 - 您的南國購物天堂</title>
+
+  <!-- 站內樣式（既有） -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <!-- 報名表專用樣式（新） -->
+  <link rel="stylesheet" href="css/registration.css" />
+
+  <!-- 圖示 & 字型（如原站使用） -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+</head>
+<body>
+    <!-- 導航欄（動態載入） -->
+    <div id="header-container"></div>
+
+    <!-- 主內容 -->
+    <main>
+        <div id="carousel-container"></div>
+        <div id="local-container"></div>
+        <div id="events-container"></div>
+        <div id="products-container"></div>
+        <div id="main-content-container"></div>
+
+    </main>
+
+    <!-- 頁尾（動態載入） -->
+    <div id="footer-container"></div>
+
+
+    <!-- 首頁商品詳情蓋板 -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <!-- 關閉按鈕 -->
+            <span class="close-btn">&times;</span>
+
+            <!-- 商品圖片 + 標籤 -->
+            <div class="product-image">
+                <img src="/images/product/言久嵢.jpg" alt="極。蛋黃酥禮盒">
+                <span class="badge">新品</span>
+            </div>
+
+            <!-- 品牌 + 名稱 -->
+            <div class="product-header">
+                <h3 class="brand">言久嵢烘焙研究室</h3>
+                <h2 class="name">極。蛋黃酥禮盒</h2>
+            </div>
+
+            <!-- 價格 -->
+            <div class="price">
+                <span class="original">售價：$600</span>
+                <span class="sale">特價：$540</span>
+            </div>
+
+            <!-- 活動時間 -->
+            <p class="time">活動時間：2025/09/01 ~ 2025/09/30</p>
+
+            <!-- 商品資訊 -->
+            <p><strong>【商品內容】</strong> - 蛋黃酥 x 8顆</p>
+            <p><strong>【保存效期】</strong> - 常溫保存，10天</p>
+            <p><strong>【注意事項】</strong></p>
+            <ul>
+                <li>蛋奶素</li>
+                <li>勿放置悶熱&日曬處</li>
+                <li>開封後請盡速食用</li>
+                <li>本產品含奶/蛋/麩質，過敏者避免食用</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- 報名表單蓋板（新版） -->
+    <div id="registration-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-event-title">
+            <span class="close-btn" aria-label="關閉">×</span>
+            <h2 id="modal-event-title">活動報名</h2>
+
+            <form id="registration-form" novalidate>
+                <!-- 並排：姓名＋手機 -->
+                <div class="form-row">
+                    <div class="field">
+                        <label for="name">姓名：</label>
+                        <input type="text" id="name" name="name" autocomplete="name" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="phone">手機：</label>
+                        <input type="tel"
+                               id="phone"
+                               name="phone"
+                               inputmode="numeric"
+                               placeholder="0912345678"
+                               pattern="^09\\d{8}$"
+                               title="請輸入 09 開頭的 10 碼手機號碼（例如：0912345678）"
+                               required />
+                        <small class="hint">格式：09 開頭，共 10 碼</small>
+                    </div>
+                </div>
+
+                <!-- 其餘欄位 -->
+                <div class="field">
+                    <label for="gender">性別：</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">請選擇</option>
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="birthdate">出生年月日：</label>
+                    <input type="date" id="birthdate" name="birthdate" required />
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn submit-btn">送出</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 會員登入蓋板（原有） -->
+    <div id="login-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="login-title">
+            <span class="close-btn" aria-label="關閉">×</span>
+            <h2 id="login-title">會員登入</h2>
+            <form id="login-form">
+                <label for="username">帳號:</label>
+                <input type="text" id="username" name="username" required />
+
+                <label for="password">密碼:</label>
+                <input type="password" id="password" name="password" required />
+
+                <div class="login-links">
+                    <a href="#" class="register-link">加入會員</a>
+                    <span>|</span>
+                    <a href="#" class="forgot-password-link">忘記密碼</a>
+                </div>
+
+                <button type="submit" class="btn submit-btn">登入</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 站內腳本（既有） -->
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- 開/關報名蓋板 + 手機欄位輸入限制（新） -->
+    <script>
+        (function () {
+            const modal = document.getElementById('registration-modal');
+            if (!modal) return;
+
+            const content = modal.querySelector('.modal-content');
+            const closeBtn = modal.querySelector('.close-btn');
+
+            // 讓 close span 也能鍵盤操作
+            if (closeBtn) { closeBtn.setAttribute('role', 'button'); closeBtn.setAttribute('tabindex', '0'); }
+
+            let lastFocus = null;
+            let scrollY = 0;
+
+            function openModal(e) {
+                if (e) e.preventDefault();
+                lastFocus = document.activeElement;
+                scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+                document.body.style.top = `-${scrollY}px`;
+                document.body.classList.add('modal-open');
+                modal.setAttribute('aria-hidden', 'false');
+
+                // 聚焦第一個可聚焦元素
+                setTimeout(() => {
+                    const first = modal.querySelector('input, select, textarea, button, [href], [tabindex]:not([tabindex="-1"])');
+                    if (first) first.focus();
+                }, 0);
+
+                pauseBackground(true);
+            }
+
+            function closeModal(e) {
+                if (e) e.preventDefault();
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+                document.body.style.top = '';
+                window.scrollTo(0, scrollY);
+                if (lastFocus) { try { lastFocus.focus(); } catch (_) { } }
+                pauseBackground(false);
+            }
+
+            // 暫停/恢復背景影片與輪播
+            function pauseBackground(on) {
+                document.querySelectorAll('video').forEach(v => {
+                    try {
+                        if (on) { v.dataset.wasPlaying = (!v.paused).toString(); v.pause(); }
+                        else if (v.dataset.wasPlaying === 'true') { v.play().catch(() => { }); }
+                        v.removeAttribute('data-was-playing');
+                    } catch (_) { }
+                });
+                if (window.carousel) {
+                    if (on && typeof carousel.stopAutoPlay === 'function') carousel.stopAutoPlay();
+                    if (!on && typeof carousel.startAutoPlay === 'function') carousel.startAutoPlay();
+                }
+            }
+
+            // 事件：用 .register-btn 開啟（事件委派）
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('.register-btn');
+                if (btn) openModal(e);
+            });
+
+            // 事件：關閉（X、背景、鍵盤）
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+                closeBtn.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') closeModal(e);
+                });
+            }
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(e); });
+            document.addEventListener('keydown', (e) => {
+                const open = modal.getAttribute('aria-hidden') === 'false';
+                if (!open) return;
+
+                if (e.key === 'Escape') return closeModal(e);
+
+                if (e.key === 'Tab') {
+                    const focusables = modal.querySelectorAll('a[href],button,textarea,input,select,[tabindex]:not([tabindex="-1"])');
+                    const nodes = Array.from(focusables).filter(el => !el.disabled && el.offsetParent !== null);
+                    if (!nodes.length) return;
+                    const first = nodes[0], last = nodes[nodes.length - 1];
+                    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+                }
+            });
+
+            // 手機欄位：僅允許數字、最長 10 碼；送出前再驗證一次
+            document.addEventListener('input', (e) => {
+                if (e.target && e.target.id === 'phone') {
+                    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                }
+            });
+            const regForm = document.getElementById('registration-form');
+            if (regForm) {
+                regForm.addEventListener('submit', (e) => {
+                    const tel = document.getElementById('phone');
+                    if (!/^09\d{8}$/.test(tel.value)) {
+                        tel.reportValidity();
+                        e.preventDefault();
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

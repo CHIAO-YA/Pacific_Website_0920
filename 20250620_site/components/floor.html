@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>屏東太平洋百貨 - 品牌樓層</title>
+
+    <!-- 樣式：header 已命名空間 .site-header，不會汙染內容 -->
+    <link rel="stylesheet" href="/css/floor.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- 共用 Header 載入 -->
+    <script src="/js/header.js" defer></script>
+
+    <style>
+        /* 輕量提示，可保留或刪除 */
+        .loading {
+            text-align: center;
+            padding: 24px;
+            color: #888;
+        }
+
+        .error {
+            text-align: center;
+            padding: 24px;
+            color: #c33;
+        }
+    </style>
+</head>
+<body>
+    <!-- 共用 Header 容器 -->
+    <div id="header-container"></div>
+
+    <section class="brands">
+        <div class="container">
+            <h2 class="section-title">品牌樓層</h2>
+            <!-- 篩選區域 -->
+            <div class="filter-section">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>分館選擇</label>
+                        <select class="filter-select" id="building-select">
+                            <option value="all">- 所有分館 -</option>
+                            <option value="main">本館・二館</option>
+                            <option value="pingtung">屏東驛站商場</option>
+                            <option value="chaozhou">潮州驛站商場</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>樓層選擇</label>
+                        <select class="filter-select" id="floor-select">
+                            <option value="all">- 所有樓層 -</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group search-box">
+                        <label>搜尋品牌</label>
+                        <input type="text" class="search-input" placeholder="請輸入品牌名稱...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 品牌網格 -->
+            <div class="cards-container">
+                <div class="brand-card">
+                    <div class="brand-image">
+                        <img src="/images/floor/CLINIQUE.jfif" alt="CLINIQUE">
+                    </div>
+                    <div class="brand-info">
+                        <div class="brand-name">CLINIQUE</div>
+                        <div class="brand-floor">1F</div>
+                    </div>
+                </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <img src="/images/floor/麥當勞.jfif" alt="麥當勞">
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">麥當勞</div>
+                            <div class="brand-floor">1F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">NIKE</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">NIKE</div>
+                            <div class="brand-floor">4F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">CHANEL</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">CHANEL</div>
+                            <div class="brand-floor">1F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">DIOR</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">DIOR</div>
+                            <div class="brand-floor">3F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">UNIQLO</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">UNIQLO</div>
+                            <div class="brand-floor">4F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">星巴克</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">Starbucks</div>
+                            <div class="brand-floor">B1F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">麥當勞</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">McDonald's</div>
+                            <div class="brand-floor">B1F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">FOSSIL</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">FOSSIL</div>
+                            <div class="brand-floor">1F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">SKECHERS</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">SKECHERS</div>
+                            <div class="brand-floor">4F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">CASIO</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">CASIO</div>
+                            <div class="brand-floor">6F</div>
+                        </div>
+                    </div>
+
+                    <div class="brand-card">
+                        <div class="brand-image">
+                            <div class="demo-logo">MUJI</div>
+                        </div>
+                        <div class="brand-info">
+                            <div class="brand-name">無印良品</div>
+                            <div class="brand-floor">5F</div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <script src="/js/floor.js"></script>
+</body>
+</html>

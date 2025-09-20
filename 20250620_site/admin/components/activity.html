@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>屏東太平洋百貨 - 活動報名管理</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 側邊欄 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-store logo-icon"></i>
+                屏東太平洋百貨
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <div class="sidebar-menu-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>儀表板</span>
+            </div>
+
+            <div class="sidebar-menu-section">產品管理</div>
+            <div class="sidebar-menu-item">
+                <i class="fas fa-box"></i>
+                <span>全部商品</span>
+            </div>
+            <ul class="sidebar-menu-submenu">
+                <li><a href="#">□ 全部商品</a></li>
+                <li><a href="#">□ 新增商品</a></li>
+                <li><a href="#">□ 商品分類</a></li>
+                <li><a href="#">□ 促銷管理</a></li>
+                <li><a href="#">□ 商品評論</a></li>
+            </ul>
+
+            <div class="sidebar-menu-section">訂單管理</div>
+            <div class="sidebar-menu-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>訂單列表</span>
+            </div>
+            <ul class="sidebar-menu-submenu">
+                <li><a href="#">□ 訂單列表</a></li>
+                <li><a href="#">□ 出貨管理</a></li>
+                <li><a href="#">□ 退換貨管理</a></li>
+            </ul>
+
+            <div class="sidebar-menu-section">會員管理</div>
+            <div class="sidebar-menu-item">
+                <i class="fas fa-users"></i>
+                <span>會員列表</span>
+            </div>
+            <ul class="sidebar-menu-submenu">
+                <li><a href="#">□ 會員列表</a></li>
+                <li><a href="#">□ 會員等級</a></li>
+            </ul>
+
+            <div class="sidebar-menu-section">內容管理</div>
+            <div class="sidebar-menu-item active">
+                <i class="fas fa-pager"></i>
+                <span>網站內容</span>
+            </div>
+            <ul class="sidebar-menu-submenu">
+                <li><a href="#">□ 首頁輪播</a></li>
+                <li><a href="#" class="active">□ 活動公告</a></li>
+                <li><a href="#">□ 部落格文章</a></li>
+            </ul>
+
+            <div class="sidebar-menu-section">系統設定</div>
+            <div class="sidebar-menu-item">
+                <i class="fas fa-cog"></i>
+                <span>網站設定</span>
+            </div>
+            <ul class="sidebar-menu-submenu">
+                <li><a href="#">□ 網站設定</a></li>
+                <li><a href="#">□ 帳號權限</a></li>
+                <li><a href="#">□ 金流設定</a></li>
+                <li><a href="#">□ 物流設定</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- 主要內容區域 -->
+    <div class="main-content">
+        <!-- 頂部導航欄 -->
+        <header class="header">
+            <button class="toggle-sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="search-form">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜尋活動...">
+            </div>
+            <div class="header-actions">
+                <div class="notification">
+                    <i class="fas fa-bell notification-icon"></i>
+                    <div class="notification-badge">3</div>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="/api/placeholder/40/40" alt="管理員頭像">
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">陳經理</div>
+                        <div class="user-role">系統管理員</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 頁面內容 -->
+        <div class="page-content">
+            <!-- 麵包屑 -->
+            <ul class="breadcrumb">
+                <li><a href="#">首頁</a></li>
+                <li><a href="#">內容管理</a></li>
+                <li>活動公告</li>
+            </ul>
+
+            <!-- 頁面標題 -->
+            <div class="page-title">
+                <div>
+                    <h1>活動報名管理</h1>
+                    <p>管理活動公告與報名資訊</p>
+                </div>
+                <button class="btn btn-primary" onclick="openActivityModal('add')">
+                    <i class="fas fa-plus"></i> 新增活動
+                </button>
+            </div>
+
+            <!-- 篩選器 -->
+            <div class="filter-container">
+                <form class="filter-form" id="filter-form">
+                    <div class="filter-form-group">
+                        <label>活動狀態</label>
+                        <select class="filter-form-control" id="filter-status">
+                            <option value="">全部狀態</option>
+                            <option value="ongoing">進行中</option>
+                            <option value="not-started">尚未開始</option>
+                            <option value="ended">已結束</option>
+                        </select>
+                    </div>
+                    <div class="filter-form-group">
+                        <label>活動日期起</label>
+                        <input type="date" class="filter-form-control" id="filter-date-start">
+                    </div>
+                    <div class="filter-form-group">
+                        <label>活動日期迄</label>
+                        <input type="date" class="filter-form-control" id="filter-date-end">
+                    </div>
+                    <div class="filter-form-group">
+                        <div class="filter-buttons">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i> 搜尋
+                            </button>
+                            <button type="reset" class="btn btn-outline">
+                                <i class="fas fa-redo"></i> 重置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 活動表格 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">活動清單</h3>
+                    <div>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-file-export"></i> 匯出
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="data-table" id="activity-table">
+                            <thead>
+                                <tr>
+                                    <th>活動編號</th>
+                                    <th>活動標題</th>
+                                    <th>活動日期</th>
+                                    <th>活動時間</th>
+                                    <th>報名人數</th>
+                                    <th>狀態</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activity-table-body">
+                                <!-- 活動數據將由 JavaScript 動態生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <ul class="pagination">
+                        <li><a href="#" onclick="changePage(-1)">«</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#" onclick="changePage(1)">»</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 活動新增/編輯模態框 -->
+    <div id="activity-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeActivityModal()">×</span>
+            <h2 class="modal-title" id="modal-title">新增活動</h2>
+            <form id="activity-form">
+                <input type="hidden" id="activity-id">
+                <div class="form-group">
+                    <label class="form-label">活動標題</label>
+                    <input type="text" id="activity-title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">活動日期</label>
+                    <input type="date" id="activity-date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">活動時間</label>
+                    <input type="time" id="activity-time" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">活動內容</label>
+                    <textarea id="activity-content" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">上架時間</label>
+                    <input type="datetime-local" id="activity-start-date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">下架時間</label>
+                    <input type="datetime-local" id="activity-end-date" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">儲存</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

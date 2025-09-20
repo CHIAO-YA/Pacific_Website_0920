@@ -1,0 +1,121 @@
+/* /css/dm.css  —  對齊 brands.css 的設計語彙 */
+:root{
+  --accent:#FF8C42;           /* 與 brands.css 主色一致 */
+  --bg:#f8f9fa;
+  --ink:#333;
+  --muted:#666;
+  --card:#fff;
+  --radius:12px;              /* 與 brands 的 12px 卡片圓角齊 */
+  --shadow:0 4px 10px rgba(0,0,0,.1);
+  --shadow-lg:0 10px 30px rgba(0,0,0,.12);
+  --blue:#0d6efd;             /* 回首頁按鈕的底色（與 DM tabs 區隔） */
+}
+
+/* 容器 */
+#dm-app{
+  min-height:100vh;
+  background:linear-gradient(135deg,#f5f1e8,#e8dcc0);
+  padding:clamp(10px,2vw,24px);
+  color:var(--ink);
+  display:flex; flex-direction:column; gap:16px;
+}
+
+/* 頁首：左邊回首頁、置中標題 */
+.dm-header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px;
+}
+.dm-title{
+  margin:0 auto;
+  font-weight:800;
+  font-size:clamp(22px,4.6vw,30px);
+  color:#d2691e; /* 與 brands 的橘系調性協調 */
+  text-shadow:2px 2px 4px rgba(0,0,0,.06);
+}
+
+/* 回首頁按鈕：參考 brands.css 的 .btn，改用藍色底 */
+.dm-home{
+  display:inline-block;
+  padding:.6rem 1.2rem;
+  background-color:var(--blue);
+  color:#fff; text-decoration:none;
+  border-radius:999px;
+  font-weight:700;
+  box-shadow:var(--shadow);
+  transition:background-color .2s ease, transform .15s ease;
+  white-space:nowrap;
+}
+.dm-home:hover{ background-color:#0b5ed7; }
+.dm-home:active{ transform:translateY(1px); }
+
+/* DM 選擇 tabs：參考 brands.css 的 location-btn 語彙 */
+.dm-tabs{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.dm-tab{
+  padding:.7rem 1rem;
+  background:#f1f1f1;
+  border:none; border-radius:20px;
+  cursor:pointer; font-size:clamp(15px,2.9vw,18px);
+  color:#666; font-weight:800; line-height:1;
+  transition:all .2s ease; box-shadow:var(--shadow);
+}
+.dm-tab:hover{ background:#e0e0e0; }
+.dm-tab[aria-selected="true"]{ background:var(--accent); color:#fff; transform:translateY(-1px); }
+
+/* 主體區 */
+.dm-shell{ display:grid; grid-template-columns:1fr; gap:14px; margin:0 auto; width:min(1200px,100%); }
+
+/* 活動說明卡片：沿用 brands 的卡樣式與陰影 */
+.dm-info{
+  background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:14px 16px; line-height:1.6;
+}
+.dm-info h3{ margin:0 0 6px; font-size:clamp(18px,2.6vw,22px); color:#d2691e; }
+.dm-info p{ margin:.25rem 0; color:#444; }
+
+/* 翻頁區 */
+.dm-book-wrap{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow-lg); padding:10px; }
+.dm-book-viewport{
+  margin:0 auto; position:relative; width:min(100%,980px);
+  aspect-ratio:3/2; overflow:hidden; border-radius:12px; background:#f8f9fa;
+}
+#dm-viewport:fullscreen{ width:100vw; height:100vh; aspect-ratio:auto; border-radius:0; background:#fff; }
+
+/* 讓頁面圖盡量填滿可視區（不裁切） */
+#dm-book, #dm-book .page{ width:100%; height:100%; }
+#dm-book img{ width:100%; height:100%; object-fit:contain; background:#fff; display:block; }
+
+/* 左右翻頁 + 放大鏡 icon（常駐） */
+.nav-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.62); color:#fff; font-size:22px; font-weight:900;
+  border:none; cursor:pointer; user-select:none;
+  transition:.15s; z-index:99;
+}
+.nav-btn:hover{ background:rgba(0,0,0,.75); }
+.nav-left{ left:10px; } .nav-right{ right:10px; }
+
+.nav-zoom{
+  position:absolute; right:10px; top:10px; z-index:100;
+  width:42px; height:42px; border-radius:50%;
+  background:rgba(13,110,253,.95); color:#fff; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+  box-shadow:var(--shadow);
+}
+.nav-zoom:hover{ background:rgba(13,110,253,1); }
+
+/* 頁點 */
+.dm-dots{ display:flex; gap:6px; justify-content:center; margin-top:10px; }
+.dm-dot{ width:10px; height:10px; border-radius:50%; background:rgba(0,0,0,.15); }
+.dm-dot.active{ background:var(--accent); }
+
+/* 響應式 */
+@media (max-width: 768px){
+  .dm-book-viewport{ aspect-ratio:3/4; }
+  .nav-btn{ width:42px; height:42px; font-size:20px; }
+  .nav-left{ left:6px; } .nav-right{ right:6px; }
+  .dm-header{ flex-wrap:wrap; }
+  .dm-home{ order:2; }
+  .dm-title{ order:1; width:100%; text-align:center; }
+}

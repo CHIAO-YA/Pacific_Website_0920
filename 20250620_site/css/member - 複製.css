@@ -1,0 +1,80 @@
+/* /css/member.css  — 與 brands.css 一致的配色與卡片/按鈕語彙 */
+.member .container { max-width: 960px; }
+
+/* 隱藏用的標題(無障礙) */
+.sr-only {
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); border:0;
+}
+
+/* 次導覽（子選項）沿用 brands 的膠囊按鈕風格 */
+.subtabs {
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+  margin-bottom: 1rem;
+}
+.subtabs .subtab { /* 按鈕樣式由 brands.css 的 .location-btn 提供 */ }
+
+/* 內容卡片：對齊 brands 的 card 陰影/圓角 */
+.member-card{
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  overflow:hidden;
+  margin-bottom:1rem;
+  animation: slideIn .5s ease forwards;
+  opacity:0;
+}
+@keyframes slideIn { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+.member-card .card-body{ padding:1.25rem 1.25rem 1.5rem; }
+.member-card h4{ font-size:1.35rem; margin-bottom:.5rem; color:#333; }
+.member-card h5{ font-size:1.05rem; margin:.75rem 0 .35rem; color:#FF8C42; }
+.member-card p{ color:#666; }
+.member-card ul, .member-card ol{ margin:.25rem 0 .5rem 1.25rem; color:#666; }
+.member-card .meta{ margin-top:.5rem; color:#888; }
+.member-card .muted{ color:#888; }
+
+.member-card .card-media{ width:100%; max-height:420px; overflow:hidden; background:#f6f7f8; }
+.member-card .card-media img{ display:block; width:100%; height:auto; object-fit:contain; }
+.member-card .card-media.center{ display:flex; justify-content:center; align-items:center; padding:1rem; }
+
+/* 中獎名單：圖片完整顯示，不裁切 */
+#section-winner .member-card { overflow:visible; }
+#section-winner .card-media{ max-height:none; overflow:visible; background:transparent; padding:0; }
+#section-winner .card-media img{ width:100%; height:auto; object-fit:contain; }
+
+/* 會員分級區：僅顯示當前子面板 */
+.subpanel{ display:none; }
+.subpanel.is-open{ display:block; }
+
+/* 區塊顯示控制（主分頁） */
+.member-section{ display:none; }
+.member-section.is-active{ display:block; }
+
+/* 服務項目：兩欄格線（手機改單欄） */
+.grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+}
+.grid .member-card{ height:100%; }
+
+/* 表格（媽媽教室與兌換表） */
+.table-wrap{ overflow:auto; }
+.sheet{ width:100%; border-collapse:collapse; }
+.sheet th, .sheet td{
+  border-bottom:1px solid #eee; padding:.75rem; text-align:left; white-space:nowrap;
+}
+.sheet thead th{ background:#fafafa; color:#333; font-weight:700; }
+.sheet.convert td:first-child{ font-weight:700; }
+.sheet .muted{ color:#888; text-align:center; }
+
+/* 有序清單緊湊版 */
+ol.tight{ padding-left:1.25rem; }
+ol.tight li{ margin:.25rem 0; }
+
+/* 響應式 */
+@media (max-width: 768px){
+  .member .container{ padding:0 1rem; }
+  .grid{ grid-template-columns:1fr; }
+  .member-card .card-media{ max-height:320px; }
+  #section-winner .card-media{ max-height:none; }
+}

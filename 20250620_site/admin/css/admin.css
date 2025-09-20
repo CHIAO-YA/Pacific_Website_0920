@@ -1,0 +1,661 @@
+:root {
+    --primary-color: #FF8C42; /* 暖橘色，代表屏東陽光 */
+    --secondary-color: #2D7DD2; /* 海洋藍，象徵墾丁海岸 */
+    --accent-color: #97CC04; /* 綠色，代表屏東農業與自然 */
+    --light-color: #FFF8E8; /* 米白色，沙灘色調 */
+    --dark-color: #45474B; /* 暗灰色，文字顏色 */
+    --sidebar-width: 240px;
+    --header-height: 60px;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --gray-bg: #f8f9fa;
+    --info-color: #17a2b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: var(--dark-color);
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 側邊欄樣式 */
+.sidebar {
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, var(--dark-color), #2c2e30);
+    color: white;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header .logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-header .logo-icon {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.sidebar-menu {
+    padding: 1rem 0;
+    list-style: none;
+}
+
+.sidebar-menu-item {
+    padding: 0.8rem 1.5rem;
+    margin: 0.2rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu-item.active {
+    background-color: var(--primary-color);
+    border-left: 4px solid white;
+}
+
+.sidebar-menu-item i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-menu-section {
+    padding: 1rem 1.5rem 0.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-menu-submenu {
+    list-style: none;
+    padding-left: 2.5rem;
+    height: auto;
+    overflow: hidden;
+}
+
+.sidebar-menu-submenu li {
+    padding: 0.6rem 0;
+}
+
+.sidebar-menu-submenu a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.sidebar-menu-submenu a:hover {
+    color: white;
+}
+
+.sidebar-menu-submenu a.active {
+    color: var(--primary-color);
+}
+
+.sidebar-menu-submenu a:before {
+    content: '□';
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+/* 主要內容區域 */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    transition: all 0.3s ease;
+}
+
+/* 頂部導航欄 */
+.header {
+    background-color: white;
+    height: var(--header-height);
+    padding: 0 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.toggle-sidebar {
+    background: none;
+    border: none;
+    color: var(--dark-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.search-form {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 2rem;
+    position: relative;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-form input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.2);
+}
+
+.search-form i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.notification {
+    position: relative;
+    margin-right: 1rem;
+}
+
+.notification-icon {
+    color: var(--dark-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 0.7rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--gray-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-info {
+    line-height: 1.2;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* 頁面內容 */
+.page-content {
+    padding: 1.5rem;
+}
+
+.page-title {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.breadcrumb {
+    display: flex;
+    list-style: none;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumb li {
+    margin-right: 0.5rem;
+}
+
+.breadcrumb li:after {
+    content: '/';
+    margin-left: 0.5rem;
+    color: #aaa;
+}
+
+.breadcrumb li:last-child:after {
+    content: '';
+}
+
+.breadcrumb a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* 卡片樣式 */
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+    background-color: var(--gray-bg);
+}
+
+/* 表格樣式 */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.data-table th {
+    font-weight: 600;
+    background-color: var(--gray-bg);
+}
+
+.data-table tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-icon.edit {
+    background-color: var(--secondary-color);
+}
+
+.btn-icon.delete {
+    background-color: var(--danger-color);
+}
+
+.btn-icon.view {
+    background-color: var(--accent-color);
+}
+
+.btn-icon:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* 狀態標籤 */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status-badge.ongoing {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+}
+
+.status-badge.ended {
+    background-color: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+}
+
+.status-badge.not-started {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+}
+
+/* 按鈕樣式 */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: var(--dark-color);
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 表單樣式 */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.2);
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* 篩選器和搜尋區塊 */
+.filter-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.filter-form-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.filter-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.filter-form-control {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.filter-form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.2);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* 分頁樣式 */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    justify-content: center;
+}
+
+.pagination li {
+    margin: 0 0.25rem;
+}
+
+.pagination a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: var(--gray-bg);
+}
+
+.pagination .active a {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 模態框 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    padding: 1rem;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #777;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-form {
+        display: none;
+    }
+
+    .filter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-header .btn {
+        margin-top: 0.5rem;
+    }
+}

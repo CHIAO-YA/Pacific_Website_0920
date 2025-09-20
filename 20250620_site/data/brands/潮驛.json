@@ -1,0 +1,42 @@
+[
+  {
+    "name": "廚咖哩",
+    "desc": "融合日式與印度香料的特色咖哩，濃郁醬香與柔軟白飯完美契合。",
+    "floor": "潮州驛站 1F",
+    "tel": "08-7661127",
+    "logo": "/images/brand/6.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "肯德基 KFC",
+    "desc": "經典脆皮炸雞與香酥蛋撻，從單人套餐到多人分享餐，一次滿足速食饗宴。",
+    "floor": "潮州驛站 1F",
+    "tel": "08-7881230",
+    "logo": "/images/brand/7.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "馬德里",
+    "desc": "西班牙風味小館，主打經典海鮮燉飯與各式 Tapas，小酌聚會的好去處。",
+    "floor": "潮州驛站 1F",
+    "tel": "08-7807168",
+    "logo": "/images/brand/8.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  },
+  {
+    "name": "好正點",
+    "desc": "道地港式點心熱騰騰上桌，從鮮蝦腸粉到流沙奶皇包，每籠都正點。",
+    "floor": "潮州驛站 1F",
+    "tel": "08-7808658",
+    "logo": "/images/brand/9.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  }
+]

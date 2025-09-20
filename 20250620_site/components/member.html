@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>會員專區｜屏東太平洋百貨</title>
+
+  <!-- 站上風格 -->
+  <link rel="stylesheet" href="/css/brands.css" />
+  <link rel="stylesheet" href="/css/member.css" />
+  <link rel="stylesheet" href="/css/header.css" />
+
+  <!-- 圖示（可選） -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- 動態載入共用 Header -->
+  <div id="header-container"></div>
+
+  <section class="member brands">
+    <div class="container">
+      <h2 class="section-title">會員專區</h2>
+
+      <!-- 主分頁：沿用 .location-btn 風格 -->
+      <div class="location-filter tabbar">
+        <button class="location-btn active" data-target="section-tier">會員分級</button>
+        <button class="location-btn" data-target="section-service">顧客服務</button>
+        <button class="location-btn" data-target="section-class">媽媽教室</button>
+        <button class="location-btn" data-target="section-winner">中獎名單</button>
+      </div>
+
+      <!-- 會員分級（含 5 個子頁） -->
+      <div id="section-tier" class="member-section is-active">
+        <!-- 子選項 -->
+        <div class="subtabs">
+          <button class="location-btn active" data-tab="point">吉利點</button>
+          <button class="location-btn" data-tab="vip">VIP PASS</button>
+          <button class="location-btn" data-tab="kid">兒童卡</button>
+          <button class="location-btn" data-tab="birthday">生日禮</button>
+          <button class="location-btn" data-tab="faq">吉利卡 Q&A</button>
+        </div>
+
+        <!-- 吉利點數兌換 -->
+        <div id="tab-point" class="subpanel is-open">
+          <article class="member-card">
+            <div class="card-body">
+              <h4>吉利點數兌換</h4>
+              <p class="muted">吉利卡點數自動清零，當年度累積之吉利卡點數有效期限為次年年底。</p>
+              <h5>兌換方式</h5>
+              <ol class="tight">
+                <li><strong>線上折抵：</strong>於消費時出示吉利卡或 APP 吉利卡條碼即可扣點。（40 點為基本扣點單位）</li>
+                <li><strong>電子商品券：</strong>於指定服務台以點數兌換電子商品券。</li>
+              </ol>
+
+              <div class="grid">
+                <div class="member-card">
+                  <div class="card-body">
+                    <h5>1) 線上折抵</h5>
+                    <p><strong>折抵地點：</strong>各專櫃收銀台。</p>
+                    <table class="sheet convert">
+                      <thead><tr><th>扣點數</th><th>可折抵金額</th></tr></thead>
+                      <tbody>
+                        <tr><td>40 點</td><td>—</td></tr>
+                        <tr><td>80 點</td><td>NT$ 20</td></tr>
+                        <tr><td>160 點</td><td>NT$ 40</td></tr>
+                        <tr><td colspan="2" class="muted">…以此類推，最高可折抵消費金額的 100%</td></tr>
+                      </tbody>
+                    </table>
+                    <ul>
+                      <li>為保障您的權益，折抵時請出示吉利卡或 APP 吉利卡條碼方可折抵。</li>
+                      <li>折抵金額恕不再集吉利卡點數，消費金額恕不參加全館贈獎活動。</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="member-card">
+                  <div class="card-body">
+                    <h5>2) 電子商品券</h5>
+                    <table class="sheet convert">
+                      <thead><tr><th>點數</th><th>可兌換</th></tr></thead>
+                      <tbody>
+                        <tr><td>400 點</td><td>電子商品券 NT$ 100</td></tr>
+                        <tr><td>3000 點</td><td>電子商品券 NT$ 1,000</td></tr>
+                        <tr><td>4000 點</td><td>電子商品券 NT$ 1,500</td></tr>
+                        <tr><td>5000 點</td><td>電子商品券 NT$ 2,000</td></tr>
+                      </tbody>
+                    </table>
+                    <p><strong>兌換地點：</strong>本館 6F 貴賓廳／屏東驛站商場 2F 服務台／潮州驛站商場服務台</p>
+                    <p class="muted">電子商品券使用期限為「兌換日期隔月起計 6 個月內」有效。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- VIP PASS 卡 -->
+        <div id="tab-vip" class="subpanel">
+          <article class="member-card">
+            <div class="card-media center">
+              <img src="/images/member/vippass.png" alt="VIP PASS 卡">
+            </div>
+            <div class="card-body">
+              <h4>VIP PASS 太平洋百貨尊榮卡</h4>
+              <h5>會員資格</h5>
+              <p>連續兩年累積消費滿 NT$ 800,000，即可升等成為太平洋百貨 VVIP。</p>
+              <h5>持卡辦法</h5>
+              <p>本館將以書面通知貴賓，並致贈 VIP PASS；已為 VVIP 會員，兩年消費達 NT$ 800,000 即可續卡。</p>
+              <h5>優惠回饋</h5>
+              <ul>
+                <li>本館不限時數、次數之免費停車（限營業時間）。</li>
+                <li>檔期活動特別企劃優惠。</li>
+                <li>VVIP 生日專屬回饋禮。</li>
+                <li>每月可於 B1F 古拉爵兌換 NT$ 300 抵用券乙份（限當月使用）。</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- 兒童卡 -->
+        <div id="tab-kid" class="subpanel">
+          <article class="member-card">
+            <div class="card-media center">
+              <img src="/images/member/kid.png" alt="KAWAII BABY CLUB 兒童卡">
+            </div>
+            <div class="card-body">
+              <h4>KAWAII BABY CLUB 兒童卡</h4>
+              <h5>如何申辦 BABY 卡</h5>
+              <p>家長持太平洋百貨吉利卡、當日於 5F 開心童樂園或驛站商場 TOY WORLD 單筆消費滿 1000 元發票、媽媽手冊或小朋友健保卡即可申辦。</p>
+              <p>限 0–12 歲小朋友，超過規定年齡恕無法辦卡或續卡。</p>
+              <h5>BABY 卡使用方法及效期</h5>
+              <ul>
+                <li>卡片依附之太平洋百貨吉利卡，不接受變更或讓渡。</li>
+                <li>兒童卡不具集點功能，若需集點請出示依附之吉利卡。</li>
+                <li>效期為申辦日起至當年度 12/31 止，逾期失效。</li>
+              </ul>
+              <h5>遺失補發與資料異動</h5>
+              <p>請至本館 6F 貴賓廳、屏東驛站商場 2F 服務台或潮州驛站商場服務台辦理；補發工本費 100 元。</p>
+              <h5>續卡方式（擇一達成）</h5>
+              <ul>
+                <li>5F 開心童樂園或驛站商場 TOY WORLD 消費累計達 8,000 元。</li>
+                <li>本館/二館、驛站商場（不含遊樂場）總消費達 30,000 元。</li>
+              </ul>
+              <h5>專屬優惠</h5>
+              <ul>
+                <li>首次申辦贈精美贈品；每月前 10 名再加碼湯姆貝貝 2 小時試玩券乙份。</li>
+                <li>生日禮、專屬來店禮、不定期專屬優惠、活動訊息通知。</li>
+                <li>持卡享免費停車 1 小時（合併上限依本館停車辦法）。</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- 生日禮 -->
+        <div id="tab-birthday" class="subpanel">
+          <article class="member-card">
+            <div class="card-media center">
+              <img src="/images/member/birthday.png" alt="生日禮活動">
+            </div>
+            <div class="card-body">
+              <h4>生日禮</h4>
+              <p><strong>壽星專屬｜生日最大・消費有禮</strong></p>
+              <p>吉利卡友 / APP 會員於生日當月消費並集點，即可自動加贈吉利卡點數 100 點！</p>
+              <p>壽星本人於生日當月消費不限金額，並於結帳時出示吉利卡或 APP 會員條碼累計消費紀錄，即可自動加贈生日禮點數。</p>
+              <p class="muted">HAPPY BIRTHDAY !</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- 吉利卡 Q&A -->
+        <div id="tab-faq" class="subpanel">
+          <article class="member-card">
+            <div class="card-body">
+              <h4>吉利卡 Q&A</h4>
+              <dl class="qa">
+                <dt>Q 多少元累積一點呢？</dt>
+                <dd><p>A 單張發票消費 100 元即可累積 1 點；滿 200 元累積 2 點，以此類推。</p></dd>
+
+                <dt>Q 屏東店發行的吉利卡可至豐原店使用嗎？</dt>
+                <dd><p>A 僅屏東店使用。</p></dd>
+
+                <dt>Q 吉利卡有哪些優惠？</dt>
+                <dd>
+                  <p>A</p>
+                  <ul>
+                    <li>兌換商品券或折抵消費（40 點折 10 元）。</li>
+                    <li>參與不定期卡友來店禮活動與專刊 DM。</li>
+                    <li>購物享停車優惠（詳見各店公告）。</li>
+                    <li>生日禮專屬優惠。</li>
+                    <li>下載 APP 掌握第一手優惠訊息。</li>
+                  </ul>
+                </dd>
+
+                <dt>Q 申請吉利卡有哪些條件？</dt>
+                <dd><p>A 需年滿 13 歲（含）以上，持身分證、駕照或健保卡即可申請。</p></dd>
+
+                <dt>Q 申請吉利卡要辦卡費嗎？</dt>
+                <dd><p>A 不用。</p></dd>
+              </dl>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 顧客服務 -->
+      <div id="section-service" class="member-section">
+        <div class="grid">
+          <article class="member-card">
+            <div class="card-body">
+              <h4>本館 1F 服務台</h4>
+              <ol class="tight">
+                <li>吉利卡相關業務（辦卡、補登、開通…）</li>
+                <li>零錢、外幣兌換</li>
+                <li>輪椅、嬰兒車、兒童防走失帶借用</li>
+                <li>店內指引、活動諮詢</li>
+                <li>遺失物、拾獲物處理</li>
+                <li>停車折抵兌換</li>
+                <li>顧客意見受理</li>
+                <li>收費禮品包裝、計程車代叫、攝影證申請、尋人廣播、DM 文宣提供</li>
+              </ol>
+              <p class="meta">服務電話：(08) 732-5666 #500、#502</p>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <div class="card-body">
+              <h4>本館 6F 貴賓廳</h4>
+              <ol class="tight">
+                <li>吉利卡 / 兒童卡業務（辦卡、補登、開通、遺失補發…）</li>
+                <li>外籍旅客購物退稅（限當店）</li>
+                <li>店內指引、活動諮詢、(電子) 三聯式發票換開</li>
+                <li>太平洋百貨禮券販售</li>
+                <li>停車折抵兌換、顧客意見受理、DM 文宣提供</li>
+              </ol>
+              <p class="meta">服務電話：(08) 732-5666 #580～#583</p>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <div class="card-body">
+              <h4>屏東驛站商場 2F／潮州驛站商場 服務台</h4>
+              <ol class="tight">
+                <li>吉利卡 / 兒童卡業務（辦卡、補登、開通、遺失補發…）</li>
+                <li>(電子) 三聯式發票換開、顧客意見受理、尋人廣播</li>
+                <li>DM 文宣提供</li>
+              </ol>
+              <p class="meta">屏東驛站：(08) 755-0997 #5000｜潮州驛站：(08) 788-5977 #6000</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 媽媽教室 -->
+      <div id="section-class" class="member-section">
+        <article class="member-card">
+          <div class="card-body">
+            <h4>媽媽教室 課程須知</h4>
+            <ul>
+              <li>◎請攜帶媽媽手冊；上課日前二週開放報名預約（限 50 名）。</li>
+              <li>◎預約未能到者請於當日中午 12:00 前上網取消；逾時請來電取消。</li>
+              <li>◎為尊重講師與上課品質，請準時到場並勿攜帶幼兒；課程開始 10 分鐘後不再開放進場。</li>
+              <li>◎如有問題請電洽 (08)732-5666 #9 轉紳童家用課。</li>
+              <li>◎本公司保有活動修改、變動、暫停、終止之權利，恕不另行通知。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <div class="card-body">
+            <h5>近期課程表</h5>
+            <div class="table-wrap">
+              <table class="sheet">
+                <thead>
+                  <tr>
+                    <th>編號</th><th>上課日期 / 時間</th><th>題目</th><th>講師</th><th>協辦廠商</th><th>狀態</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="6" class="muted">敬請期待</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- 中獎名單 -->
+      <div id="section-winner" class="member-section">
+        <article class="member-card">
+          <div class="card-media">
+            <img src="/images/member/winner.png" alt="中獎名單公告">
+          </div>
+          <div class="card-body">
+            <h4>最新中獎名單</h4>
+            <p class="muted">以現場公告與客服中心說明為準。</p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 動態載入 Header + 手機選單 + 平滑捲動（防止此頁找不到錨點時跳轉） -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1) 載入 header
+      fetch('/components/header.html')
+        .then(r => r.text())
+        .then(html => {
+          const slot = document.getElementById('header-container');
+          if (!slot) return;
+          slot.innerHTML = html;
+
+          // 手機選單
+          const mobileMenu = document.querySelector('.mobile-menu');
+          const navLinks   = document.querySelector('.nav-links');
+          if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', (e) => {
+              e.stopPropagation();
+              navLinks.classList.toggle('open');
+            });
+            document.addEventListener('click', () => navLinks.classList.remove('open'));
+            window.addEventListener('resize', () => {
+              if (window.innerWidth > 576) navLinks.classList.remove('open');
+            }, { passive: true });
+          }
+
+          // 平滑捲動（若錨點不存在就阻止預設）
+          document.querySelectorAll('.scroll-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+              const id = link.getAttribute('href');
+              if (!id || !id.startsWith('#')) return;
+              const target = document.querySelector(id);
+              if (!target) { e.preventDefault(); return; }
+              e.preventDefault();
+              const header = document.querySelector('header');
+              const hh = header ? header.offsetHeight : 0;
+              const top = target.getBoundingClientRect().top + window.pageYOffset - hh;
+              window.scrollTo({ top, behavior: 'smooth' });
+            });
+          });
+        });
+
+      // 2) 主分頁切換
+      const sectionBtns = document.querySelectorAll('.tabbar .location-btn');
+      const sections    = document.querySelectorAll('.member-section');
+      sectionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          sectionBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const id = btn.dataset.target;
+          sections.forEach(s => s.classList.toggle('is-active', s.id === id));
+        });
+      });
+
+      // 3) 子分頁切換（會員分級）
+      const subBtns  = document.querySelectorAll('.subtabs .location-btn');
+      const subpanes = document.querySelectorAll('#section-tier .subpanel');
+      subBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          subBtns.forEach(x => x.classList.remove('active'));
+          b.classList.add('active');
+          const tab = 'tab-' + b.dataset.tab;
+          subpanes.forEach(p => p.classList.toggle('is-open', p.id === tab));
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>屏東太平洋百貨 - 美食饗宴</title>
+
+  <!-- 樣式：header 已命名空間 .site-header，不會汙染內容 -->
+  <link rel="stylesheet" href="/css/brands.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- 共用 Header 載入 -->
+  <script src="/js/header.js" defer></script>
+
+  <style>
+    /* 輕量提示，可保留或刪除 */
+    .loading { text-align:center; padding:24px; color:#888; }
+    .error   { text-align:center; padding:24px; color:#c33; }
+  </style>
+</head>
+<body>
+  <!-- 共用 Header 容器 -->
+  <div id="header-container"></div>
+
+  <section class="brands">
+    <div class="container">
+      <h2 class="section-title">美食饗宴</h2>
+
+      <!-- 位置篩選器 -->
+      <div class="location-filter">
+        <button class="location-btn active" data-location="all">全部餐廳</button>
+        <button class="location-btn" data-location="本館">本館餐廳</button>
+        <button class="location-btn" data-location="二館">二館餐廳</button>
+        <button class="location-btn" data-location="屏東驛站">屏東驛站</button>
+        <button class="location-btn" data-location="潮州驛站">潮州驛站</button>
+        <a href="/index.html" class="location-btn home-btn"><i class="fas fa-home"></i> 回首頁</a>
+      </div>
+
+      <!-- 餐廳清單：由 JS 動態注入 -->
+      <div id="brands-list" class="brands-list">
+        <div class="loading">資料載入中…</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function () {
+    // 四個分類的資料檔（可改成 .txt；支援自動解析）
+    const DATA_URLS = {
+      '本館':      '/data/brands/本館.json',
+      '二館':      '/data/brands/二館.json',
+      '潮州驛站':  '/data/brands/潮驛.json',
+      '屏東驛站':  '/data/brands/屏驛.json'
+    };
+
+    // 解析 TXT：每行一筆，| 分隔
+    // name | desc | floor | tel | logo | menuUrl | reserveUrl | show(0/1, 可省=1)
+    function parseTxt(text) {
+      const lines = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      return lines.map(line => {
+        const parts = line.split('|').map(s => (s||'').trim());
+        const [name, desc, floor, tel, logo, menuUrl, reserveUrl, show] = parts;
+        return {
+          name, desc, floor, tel, logo, menuUrl, reserveUrl,
+          show: (show === undefined || show === '') ? 1 : Number(show)
+        };
+      });
+    }
+
+    async function loadOne(url) {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(url + ' 載入失敗 (' + res.status + ')');
+      const ct = (res.headers.get('content-type') || '').toLowerCase();
+      if (ct.includes('application/json') || url.endsWith('.json')) {
+        return res.json();
+      } else {
+        const text = await res.text();
+        return parseTxt(text);
+      }
+    }
+
+    function sanitize(str) {
+      return (str || '').replace(/[<>&"]/g, s => ({ '<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;' }[s]));
+    }
+
+    function createCard(item, locationLabel) {
+      const name = sanitize(item.name);
+      const desc = sanitize(item.desc);
+      const floor = sanitize(item.floor || locationLabel);
+      const tel = sanitize(item.tel);
+      const logo = item.logo || '/images/brand/placeholder.png';
+
+      // ✅ 有值才顯示；不再用電話當後備
+      const menuUrl = item.menuUrl ? String(item.menuUrl).trim() : '';
+      const reserveUrl = item.reserveUrl ? String(item.reserveUrl).trim() : '';
+
+      const card = document.createElement('div');
+      card.className = 'brand-card';
+      card.setAttribute('data-location', locationLabel);
+
+      card.innerHTML = `
+        <div class="brand-logo">
+          <img src="${logo}" alt="${name ? name + ' Logo' : 'brand logo'}" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>${name}</h3>
+          <p>${desc}</p>
+          <div class="brand-meta">
+            <span><i class="fas fa-map-marker-alt"></i> ${floor}</span>
+            ${tel ? `<span><i class="fas fa-phone"></i> TEL：${tel}</span>` : ''}
+          </div>
+          <div class="brand-actions">
+            ${reserveUrl ? `<a href="${reserveUrl}" class="btn reserve-btn">線上訂位</a>` : ''}
+            ${menuUrl ? `<a href="${menuUrl}" class="btn menu-btn">參考菜單</a>` : ''}
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    function bindFilters() {
+      const locationBtns = document.querySelectorAll('.location-btn');
+      const list = document.getElementById('brands-list');
+
+      locationBtns.forEach(btn => {
+        const loc = btn.getAttribute('data-location');
+        if (!loc) return;
+
+        btn.addEventListener('click', () => {
+          locationBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const cards = list.querySelectorAll('.brand-card');
+          cards.forEach(card => {
+            const show = (loc === 'all') || (card.getAttribute('data-location') === loc);
+            card.style.display = show ? 'flex' : 'none';
+            if (show) {
+              // 重新觸發 CSS 動畫（若 brands.css 有設定）
+              card.style.animation = 'none';
+              setTimeout(() => { card.style.animation = ''; }, 10);
+            }
+          });
+        });
+      });
+    }
+
+    async function init() {
+      const list = document.getElementById('brands-list');
+      list.innerHTML = '<div class="loading">資料載入中…</div>';
+
+      try {
+        // 平行載入四個檔案
+        const pairs = Object.entries(DATA_URLS);
+        const results = await Promise.all(
+          pairs.map(([label, url]) =>
+            loadOne(url).then(arr => ({ label, arr })).catch(err => ({ label, arr: [], err }))
+          )
+        );
+
+        list.innerHTML = ''; // 清除 loading
+        let total = 0;
+
+        // 依檔案順序建立卡片；尊重 show 欄位（預設 1 顯示）
+        results.forEach(({ label, arr, err }) => {
+          if (err) console.warn('載入失敗：', label, err);
+          (arr || []).forEach(item => {
+            const visible = (item.show === undefined ? 1 : Number(item.show)) === 1;
+            if (!visible) return;
+            list.appendChild(createCard(item, label));
+            total++;
+          });
+        });
+
+        if (total === 0) {
+          list.innerHTML = '<div class="error">目前沒有餐廳資料。</div>';
+        }
+
+        bindFilters();
+      } catch (e) {
+        console.error(e);
+        list.innerHTML = '<div class="error">資料載入發生錯誤，請稍後再試。</div>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  })();
+  </script>
+</body>
+</html>

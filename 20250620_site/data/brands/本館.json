@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Café Grazie 義式屋古拉爵",
+    "desc": "經典義式料理與咖啡，適合家庭聚會與朋友小聚，享受悠閒用餐時光。",
+    "floor": "B1F 生活美食家",
+    "tel": "08-7661127",
+    "logo": "/images/brand/1.png",
+    "menuUrl": "",
+    "reserveUrl": "https://reurl.cc/1KYYdV",
+    "show": 1
+  },
+  {
+    "name": "福勝亭",
+    "desc": "酥脆多汁的日式炸豬排，搭配特製醬料與高麗菜絲，經典不敗。",
+    "floor": "B1F 生活美食家",
+    "tel": "08-7661127",
+    "logo": "/images/brand/4.png",
+    "menuUrl": "",
+    "reserveUrl": "",
+    "show": 1
+  }
+]

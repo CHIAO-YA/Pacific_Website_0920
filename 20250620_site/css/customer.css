@@ -1,0 +1,83 @@
+/* 與 brands.css 同系的色彩/按鈕設計 */
+.customer .container{ max-width: 900px; }
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* 卡片 */
+.card{
+  background:#fff;border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  padding:1.25rem 1.25rem 1.4rem;margin-bottom:1rem
+}
+
+/* 表單 */
+.grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.field{ display:flex; flex-direction:column; gap:.4rem; }
+.field.full{ grid-column:1/-1; }
+label{ font-weight:700; color:#333; }
+.req{ color:#e5533d; margin-left:.15rem; }
+input, textarea{
+  width:100%; padding:.8rem .9rem; border-radius:10px; border:1px solid #e6e6e6;
+  background:#f8f8f8; outline:none; transition:border-color .2s ease, background .2s ease;
+  font-size:1rem;
+}
+input:focus, textarea:focus{ border-color:#FF8C42; background:#fff; }
+textarea{ resize:vertical; min-height:140px; }
+
+.hint{ color:#888; }
+.err-msg{ color:#e5533d; display:none; }
+.field.invalid .err-msg{ display:block; }
+.row.between{ display:flex; justify-content:space-between; align-items:center; }
+
+.count{ color:#888; }
+
+/* 驗證碼 */
+.verify .captcha-box{ display:flex; align-items:center; gap:.6rem; }
+.captcha-img{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.5rem .75rem; min-width:96px;
+  background:#eceff3; border:1px solid #e2e6ea; border-radius:8px;
+  letter-spacing:.15em; font-weight:800; color:#444; user-select:none; cursor:pointer;
+  transform:skewX(-6deg);
+}
+.btn-ghost{
+  padding:.6rem 1rem; border-radius:20px; border:1px solid #e2e6ea;
+  background:#f6f7f9; color:#555; font-weight:700; cursor:pointer;
+}
+.btn-ghost:hover{ background:#eef1f4; }
+.btn-primary{
+  padding:.75rem 1.25rem; border:none; border-radius:6px; cursor:pointer;
+  background:#FF8C42; color:#fff; font-weight:700;
+  box-shadow:0 4px 10px rgba(0,0,0,.12); transition:filter .2s ease;
+}
+.btn-primary:hover{ filter:brightness(.96); }
+
+.form-actions{ display:flex; gap:.6rem; justify-content:flex-start; margin-top:.2rem; }
+
+#capErr{ display:none; }
+
+/* 據點卡片 */
+.store h4{ font-size:1.2rem; margin-bottom:.25rem; color:#333; }
+.store .meta{ color:#666; margin-bottom:.25rem; }
+.addr{ display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+.btn-map{
+  display:inline-block; padding:.2rem .6rem; border-radius:999px;
+  background:#f1f1f1; border:1px solid #e6e6e6; color:#444; text-decoration:none; font-weight:700;
+}
+.btn-map:hover{ background:#e9ecef; }
+
+/* 交通內容 */
+.lead{ font-weight:700; color:#FF8C42; }
+.notes{ margin:.4rem 0 .2rem 1.25rem; color:#666; }
+em{ color:#666; }
+
+/* 區塊顯示控制（分頁） */
+.section{ display:none; }
+.section.is-active{ display:block; }
+
+/* 響應式 */
+@media (max-width: 768px){
+  .grid{ grid-template-columns:1fr; }
+  .form-actions{ justify-content:space-between; }
+  .customer .container{ padding:0 1rem; }
+}

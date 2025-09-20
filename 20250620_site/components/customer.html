@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+ 
+  <script src="/js/header.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>客服中心｜屏東太平洋百貨</title>
+
+  <link rel="stylesheet" href="/css/brands.css" />
+  <link rel="stylesheet" href="/css/customer.css" />  
+  <link rel="stylesheet" href="/css/header.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<section class="brands customer">
+  <div class="container">
+    <h2 class="section-title">客服中心</h2>
+
+    <!-- 四個按鈕 -->
+    <nav class="location-filter" aria-label="客服中心導覽">
+      <button class="location-btn active" data-target="sec-contact">聯絡我們</button>
+      <button class="location-btn" data-target="sec-stores">營業據點</button>
+      <button class="location-btn" data-target="sec-traffic">交通指南</button>
+      <a class="location-btn home-btn" href="/">回首頁</a>
+    </nav>
+
+    <!-- 聯絡我們 -->
+    <section id="sec-contact" class="section is-active" aria-labelledby="contact-title">
+      <h3 id="contact-title" class="sr-only">聯絡我們</h3>
+
+      <article class="card">
+        <form id="contactForm" novalidate>
+          <div class="grid">
+            <div class="field">
+              <label for="name">姓名 <span class="req">*</span></label>
+              <input id="name" name="name" type="text" placeholder="請輸入您的姓名" required>
+              <small class="err-msg">請輸入姓名</small>
+            </div>
+
+            <!-- 依需求：不做市話欄位 -->
+
+            <div class="field">
+              <label for="mobile">手機</label>
+              <input id="mobile" name="mobile" type="tel" inputmode="numeric" placeholder="0918-XXXXXX" pattern="^0\\d{8,9}$">
+              <small class="hint">格式例：0918123456</small>
+            </div>
+
+            <div class="field full">
+              <label for="email">E-mail <span class="req">*</span></label>
+              <input id="email" name="email" type="email" placeholder="name@example.com" required>
+              <small class="err-msg">請輸入正確的 E-mail</small>
+            </div>
+
+            <div class="field full">
+              <label for="content">內容 <span class="req">*</span></label>
+              <textarea id="content" name="content" rows="6" maxlength="300" placeholder="300字以內" required></textarea>
+              <div class="row between">
+                <small class="err-msg">請輸入內容</small>
+                <small class="count"><span id="remain">300</span> 字剩餘</small>
+              </div>
+            </div>
+
+            <div class="field verify">
+              <label for="captcha">驗證碼</label>
+              <div class="captcha-box">
+                <input id="captcha" name="captcha" type="text" placeholder="請輸入右側驗證碼" autocomplete="off" maxlength="6">
+                <span id="capImg" class="captcha-img" aria-label="驗證碼圖形" title="點擊更新"></span>
+                <button class="btn-ghost" type="button" id="capRefresh" aria-label="更新驗證碼">重新產生</button>
+              </div>
+              <small class="err-msg" id="capErr">驗證碼不正確</small>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">確認送出</button>
+            <button type="reset" class="btn-ghost">重新填寫</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <!-- 營業據點 -->
+    <section id="sec-stores" class="section" aria-labelledby="stores-title">
+      <h3 id="stores-title" class="sr-only">營業據點</h3>
+
+      <article class="card store">
+        <h4>本館 / Sunny Park 日光廣場</h4>
+        <p class="meta">電話：<a href="tel:087325666">(08) 732-5666</a></p>
+        <p class="addr">
+          900 屏東縣屏東市中正路 72 號
+          <a class="btn-map" target="_blank" rel="noopener"
+             href="https://www.google.com.tw/maps/place/900%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E5%B1%8F%E6%9D%B1%E5%B8%82%E4%B8%AD%E6%AD%A3%E8%B7%AF72%E8%99%9F/">
+             MAP
+          </a>
+        </p>
+        <p>週一至週五 11:00～22:00<br>週六日、例假日 10:30～22:00</p>
+      </article>
+
+      <article class="card store">
+        <h4>屏東驛站商場</h4>
+        <p class="meta">電話：<a href="tel:087550997">(08) 755-0997</a></p>
+        <p class="addr">
+          900 屏東縣屏東市公勇路 62 號
+          <a class="btn-map" target="_blank" rel="noopener"
+             href="https://www.google.com.tw/maps/place/900%E5%B1%8F%E6%9D%B1%E7%B8%A3%E5%B1%8F%E6%9D%B1%E5%B8%82%E5%85%AC%E5%8B%87%E8%B7%AF62%E8%99%9F/@22.6689478,120.4854725,17z/data=!3m1!4b1!4m6!3m5!1s0x346e17818734986f:0x5f22e7eed2eaf4c6!8m2!3d22.6689478!4d120.4854725!16s%2Fg%2F11f2xhxj09?entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D">
+             MAP
+          </a>
+        </p>
+        <p>週一至週五 11:00～22:00<br>週六日、例假日 10:30～22:00</p>
+      </article>
+
+      <article class="card store">
+        <h4>屏東轉運站商場</h4>
+        <p class="addr">
+          900 屏東縣屏東市光復路 45 號
+          <a class="btn-map" target="_blank" rel="noopener"
+             href="https://www.google.com.tw/maps/place/900%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E5%B1%8F%E6%9D%B1%E5%B8%82%E5%85%89%E5%BE%A9%E8%B7%AF45%E8%99%9F/">
+             MAP
+          </a>
+        </p>
+        <p>百貨專櫃 10:00～21:00<br>超商 05:00～23:00</p>
+      </article>
+
+      <article class="card store">
+        <h4>潮州驛站商場</h4>
+        <p class="meta">電話：<a href="tel:087885977">(08) 788-5977</a></p>
+        <p class="addr">
+          920 屏東縣潮州鎮信義路 111 號
+          <a class="btn-map" target="_blank" rel="noopener"
+             href="https://www.google.com.tw/maps/place/920%20%E5%B1%8F%E6%9D%B1%E7%B8%A3%E6%BD%AE%E5%B7%9E%E9%8E%AE%E4%BF%A1%E7%BE%A9%E8%B7%AF111%E8%99%9F/">
+             MAP
+          </a>
+        </p>
+        <p>週一至週五 11:00～21:30<br>週六日、例假日 10:30～21:30<br>藥局 09:00～23:00</p>
+      </article>
+    </section>
+
+    <!-- 交通指南 -->
+    <section id="sec-traffic" class="section" aria-labelledby="traffic-title">
+      <h3 id="traffic-title" class="sr-only">交通指南</h3>
+
+      <article class="card">
+        <h4>屏東太平洋百貨本館</h4>
+        <p class="lead">消費停車優惠（消費停車辦法）</p>
+        <p>本館停車場開放時間：<br>
+          平日 11:00–22:00／假日 10:30–22:00<br>
+          <em>開放時間以外恕不受理存取車輛</em>
+        </p>
+        <p>※ 停車券兌換地點：本館 1F 服務台、本館 6F 貴賓廳。以上消費停車優惠，限持當日發票（含銷貨明細）抵用當日停車時數。</p>
+        <p>★ 汽車：30 元／每小時</p>
+        <ol>
+          <li>館內 B2F／B3F／B4F 停車場：當日消費滿 500 元，憑當日發票免費停車 1 小時，最多 5 小時（出示吉利卡可額外＋1 小時），超過後照價收費。（含卡友獨享合計上限 6 小時）</li>
+          <li>停車收費標準：每小時 30 元，只收現金及免費停車券，不收禮券及信用卡。</li>
+          <li>本停車場僅供停車，車輛停置應遵守管理規定；離車請上鎖並自行保管貴重物品，本場不負保管責任。</li>
+          <li>停車券請妥善保管並憑券領車；遺失或毀損者，請繳驗行照與證件。停車時間自開店時起算，繳費後離場。</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h4>屏東驛站商場</h4>
+        <p class="lead">消費停車優惠（消費停車辦法）</p>
+        <p><strong>【西側－重慶路停車場】</strong> 24 小時開放　服務專線：(08)732-5666#252</p>
+        <p>※ 停車優惠兌換地點：屏東驛站商場西側停車場繳費機</p>
+        <p>★ 汽車：10 元／半小時<br>
+          當日消費滿 500 元（含）折抵 1 小時；滿 1,000 元折抵 2 小時，以此類推，<strong>最多折抵 4 小時</strong>，超過照價收費。<br>
+          吉利卡友／APP 會員（同卡號有效集點）<strong>再折抵 1 小時</strong>，與上述合併最高可折抵 5 小時。
+        </p>
+        <p>★ 機車：平日 20 元／次，假日 30 元／次<br>
+          吉利卡友／APP 會員持當日同卡號消費集點累計滿 300 元（含）以上，即可免費停車一次。
+        </p>
+        <ul class="notes">
+          <li>消費折抵需於結帳時完成集點，恕不接受補登發票。</li>
+          <li>過期吉利卡需先至屏東驛站商場 2F 服務台續卡方可消費集點。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h4>潮州驛站商場</h4>
+        <p class="lead">消費停車優惠（消費停車辦法）</p>
+        <p>停車場 24 小時開放　服務專線：(08)732-0543</p>
+        <p>※ 停車優惠兌換地點：潮州驛站商場停車場繳費機</p>
+        <p>★ 汽車：10 元／半小時<br>
+          當日消費滿 500 元（含）折抵 1 小時；滿 1,000 元折抵 2 小時，以此類推，<strong>最多折抵 4 小時</strong>，超過照價收費。<br>
+          吉利卡友／APP 會員（同卡號有效集點）<strong>再折抵 1 小時</strong>，與上述合併最高可折抵 5 小時。
+        </p>
+        <p>★ 機車：15 元／次<br>
+          吉利卡友／APP 會員持當日同卡號消費集點累計滿 300 元（含）以上，即可免費停車一次。
+        </p>
+        <ul class="notes">
+          <li>消費折抵需於結帳時完成集點，恕不接受補登發票。</li>
+          <li>過期吉利卡需先至潮州驛站商場服務台續卡方可消費集點。</li>
+          <li>※ 健身工廠顧客汽車優惠請洽健身工廠服務台。</li>
+        </ul>
+      </article>
+    </section>
+  </div>
+</section>
+
+<script>
+/* 分頁切換 */
+const tabs = document.querySelectorAll('.location-filter .location-btn:not(.home-btn)');
+const sections = document.querySelectorAll('.section');
+tabs.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    tabs.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const id = btn.getAttribute('data-target');
+    sections.forEach(s=> s.classList.toggle('is-active', s.id===id));
+    document.querySelector('.container').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+/* 內容字數計數 */
+const content = document.getElementById('content');
+const remain = document.getElementById('remain');
+if (content && remain){
+  const upd = ()=> remain.textContent = 300 - content.value.length;
+  content.addEventListener('input', upd); upd();
+}
+
+/* 極簡驗證碼（前端示意） */
+const capImg = document.getElementById('capImg');
+const capRefresh = document.getElementById('capRefresh');
+let capCode = '';
+function makeCode(n=5){
+  const s='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  capCode = Array.from({length:n},()=>s[Math.floor(Math.random()*s.length)]).join('');
+  capImg.textContent = capCode;
+}
+if (capImg){ makeCode(); }
+if (capRefresh){ capRefresh.addEventListener('click', makeCode); }
+
+/* 前端驗證（示意） */
+const form = document.getElementById('contactForm');
+if (form){
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    let ok = true;
+
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const cap = document.getElementById('captcha');
+    const capErr = document.getElementById('capErr');
+
+    // 簡單欄位檢查
+    [name,email,content].forEach(inp=>{
+      const wrap = inp.closest('.field');
+      if (!inp.checkValidity()){
+        ok = false; wrap.classList.add('invalid');
+      }else{
+        wrap.classList.remove('invalid');
+      }
+    });
+
+    // 驗證碼（大小寫忽略）
+    if (cap && cap.value.trim().toUpperCase() !== capCode.toUpperCase()){
+      ok = false; capErr.style.display='block';
+    }else{
+      capErr.style.display='none';
+    }
+
+    if (ok){
+      alert('已送出！感謝您的來信，我們將儘速與您聯繫。');
+      form.reset(); makeCode(); remain.textContent = 300;
+    }
+  });
+
+  form.addEventListener('reset', ()=>{
+    document.querySelectorAll('.field.invalid').forEach(el=>el.classList.remove('invalid'));
+    makeCode(); remain.textContent = 300;
+  });
+}
+</script>
+
+</body>
+</html>

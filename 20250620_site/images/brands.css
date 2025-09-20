@@ -1,0 +1,456 @@
+/* /css/header.css */
+
+:root {
+    --primary-color: #FF8C42;
+    --secondary-color: #2D7DD2;
+    --accent-color: #97CC04;
+    --light-color: #FFF8E8;
+    --dark-color: #45474B;
+    --spacing-unit: 1rem;
+}
+
+/* 導航欄樣式 */
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background-size: 200% 200%;
+    animation: gradientShift 10s ease infinite;
+    color: white;
+    padding: var(--spacing-unit) 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/pattern-wave.png') repeat-x bottom;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: relative;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.logo::after {
+    content: '滿2000送200全館特惠中';
+    font-size: 0.75rem;
+    font-weight: 600;
+    position: absolute;
+    bottom: -1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.logo-icon-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.8rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center; /* 確保所有項目垂直居中 */
+}
+
+.nav-links li {
+    margin-left: 2rem;
+    display: flex;
+    align-items: center; /* 確保每個 li 內的內容垂直居中 */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    line-height: 1; /* 統一行高，避免高度差異 */
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    display: inline-block;
+}
+
+.nav-links a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover:after {
+    width: 100%;
+}
+
+/* 登入按鈕樣式 */
+.login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    height: 2rem; /* 固定高度，與其他連結一致 */
+    line-height: 1; /* 統一行高 */
+    position: relative; /* 為了確保文字層級正確 */
+    overflow: hidden; /* 控制hover效果不超出按鈕 */
+}
+
+/* 背景過渡效果 */
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1; /* 確保背景在文字下層 */
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+}
+
+.login-btn:hover::before {
+    opacity: 1;
+}
+
+/* 確保文字永遠在最前面 */
+.login-btn span {
+    position: relative;
+    z-index: 5; /* 更高的z-index確保文字永遠在最上層 */
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+/* 文字顏色在hover時改變 */
+.login-btn:hover span {
+    color: var(--dark-color); /* hover時文字變深色，增加對比度 */
+}
+
+/* 漢堡選單樣式 - 預設隱藏 */
+.mobile-menu {
+    display: none; /* 預設隱藏漢堡選單 */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        margin-top: var(--spacing-unit);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-links li {
+        margin: 0.5rem;
+    }
+
+    .login-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        height: 1.8rem; /* 調整高度以適應小螢幕 */
+    }
+}
+
+@media (max-width: 576px) {
+    .header-content {
+        flex-direction: row; /* 改回 row，讓標題和漢堡選單並排 */
+        justify-content: space-between; /* 標題和漢堡選單分開 */
+        align-items: center; /* 垂直居中 */
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .logo::after {
+        font-size: 0.7rem;
+        bottom: -1rem;
+    }
+
+    .logo-icon-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .mobile-menu {
+        display: block; /* 顯示漢堡選單 */
+        font-size: 1.5rem;
+    }
+
+    .nav-links {
+        position: absolute; /* 讓選單脫離正常文檔流，定位在 header 下方 */
+        top: 100%; /* 從 header 底部開始 */
+        left: 0;
+        width: 100%;
+        background: linear-gradient(135deg, rgba(255, 140, 66, 0.9), rgba(45, 125, 210, 0.9)); /* 半透明漸層背景 */
+        flex-direction: column; /* 導航欄垂直排列 */
+        text-align: center;
+        max-height: 0; /* 預設最大高度為 0 */
+        opacity: 0; /* 預設透明 */
+        overflow: hidden; /* 隱藏內容 */
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* 平滑動畫 */
+        transform: translateY(-10px); /* 預設向上偏移 */
+        z-index: 99; /* 確保選單在其他元素之上 */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 添加陰影 */
+        border-radius: 0 0 10px 10px; /* 底部圓角 */
+    }
+
+    .nav-links.open {
+        max-height: 500px; /* 展開時的最大高度（根據內容調整） */
+        opacity: 1; /* 展開時完全可見 */
+        transform: translateY(0); /* 展開時回到原位 */
+    }
+
+    .nav-links li {
+        margin: 1rem 0; /* 加大選單項目的間距 */
+        opacity: 0; /* 預設透明 */
+        transform: translateY(-10px); /* 預設向上偏移 */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* 淡入動畫 */
+    }
+
+    /* 為每個選單項目添加逐一淡入動畫 */
+    .nav-links.open li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links.open li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    .nav-links.open li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    .nav-links.open li:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    .nav-links.open li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    .nav-links.open li:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    .nav-links.open li:nth-child(6) {
+        transition-delay: 0.35s;
+    }
+
+    .nav-links.open li:nth-child(7) {
+        transition-delay: 0.4s;
+    }
+
+    .nav-links.open li:nth-child(8) {
+        transition-delay: 0.45s;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem; /* 加大字體 */
+        font-weight: 600; /* 加粗字體 */
+        padding: 0.5rem 1rem; /* 增加點擊區域 */
+        border-radius: 5px; /* 圓角效果 */
+        transition: background-color 0.3s ease, color 0.3s ease; /* 背景和顏色過渡 */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 添加文字陰影以提升可讀性 */
+    }
+
+    .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* hover 時背景變淺 */
+        color: var(--accent-color);
+    }
+
+    /* 登入按鈕在小螢幕下的凸顯設計 */
+    .login-btn {
+        background-color: var(--accent-color); /* 預設背景色 */
+        color: var(--dark-color); /* 文字顏色 */
+        border: none; /* 移除邊框 */
+        padding: 0.6rem 1.2rem; /* 加大內邊距 */
+        font-size: 1rem; /* 加大字體 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加陰影 */
+    }
+
+    .login-btn::before {
+        background-color: var(--dark-color); /* hover 時背景變深 */
+    }
+
+    .login-btn:hover span {
+        color: white; /* hover 時文字變白 */
+    }
+}
+
+/* Popup 樣式（適用於報名表單和登入表單） */
+.modal {
+    display: none; /* 預設隱藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景遮罩 */
+    z-index: 1000; /* 確保在最上層 */
+    overflow: auto; /* 允許滾動 */
+}
+
+.modal-content {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* 與 header 一致的漸層背景 */
+    margin: 15% auto; /* 垂直居中 */
+    padding: 2rem;
+    border-radius: 10px; /* 圓角 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 陰影 */
+    width: 90%;
+    max-width: 400px; /* 最大寬度 */
+    color: white; /* 文字顏色 */
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out; /* 淡入動畫 */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-content label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.modal-content input,
+.modal-content select {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--dark-color);
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.login-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.login-links a {
+    color: var(--light-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.login-links a:hover {
+    color: var(--accent-color);
+}
+
+.login-links span {
+    color: white;
+}
+
+.submit-btn {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--dark-color);
+    color: white;
+    transform: translateY(-2px);
+}

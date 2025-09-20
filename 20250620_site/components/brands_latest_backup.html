@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>屏東太平洋百貨 - 美食饗宴</title>
+    <link rel="stylesheet" href="/css/brands.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <section class="brands">
+        <div class="container">
+            <h2 class="section-title">美食饗宴</h2>
+
+            <!-- 位置篩選器 -->
+            <div class="location-filter">
+                <button class="location-btn active" data-location="all">全部餐廳</button>
+                <button class="location-btn" data-location="本館">本館餐廳</button>
+                <button class="location-btn" data-location="二館">二館餐廳</button>
+                <button class="location-btn" data-location="屏東驛站">屏東驛站</button>
+                <button class="location-btn" data-location="潮州驛站">潮州驛站</button>
+                <a href="/index.html" class="location-btn home-btn"><i class="fas fa-home"></i> 回首頁</a>
+            </div>
+
+            <div class="brands-list">
+                <!-- Café Grazie -->
+                <div class="brand-card" data-location="本館">
+                    <div class="brand-logo">
+                        <img src="/images/brand/1.png" alt="Café Grazie Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>Café Grazie 義式屋古拉爵</h3>
+                        <p>經典義式料理與咖啡，適合家庭聚會與朋友小聚，享受悠閒用餐時光。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> B1F 生活美食家</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7661127</span>
+                        </div>
+                        <a href="tel:087327331" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                        <a href="https://reurl.cc/1KYYdV" class="btn menu-btn">線上訂位</a>
+                    </div>
+                </div>
+
+                <!-- 陶板屋 -->
+                <div class="brand-card" data-location="二館">
+                    <div class="brand-logo">
+                        <img src="/images/brand/2.png" alt="陶板屋 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>陶板屋</h3>
+                        <p>嚴選食材的和風創意套餐，細膩的前菜與主餐節奏，饗宴級體驗。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 二館 4F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7661127</span>
+                        </div>
+                        <a href="tel:087327331" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                        <a href="https://tinyurl.com/bfz3bvb6" class="btn menu-btn">線上訂位</a>
+                    </div>
+                </div>
+
+                <!-- 涮乃葉 -->
+                <div class="brand-card" data-location="二館">
+                    <div class="brand-logo">
+                        <img src="/images/brand/3.png" alt="涮乃葉 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>涮乃葉</h3>
+                        <p>高品質日式涮涮鍋，自助蔬菜吧搭配多款湯底，溫暖又滿足。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 二館 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7661127</span>
+                        </div>
+                        <a href="tel:087327331" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                        <a href="https://tinyurl.com/aznk24b7" class="btn menu-btn">線上訂位</a>
+                    </div>
+                </div>
+
+                <!-- 福勝亭 -->
+                <div class="brand-card" data-location="本館">
+                    <div class="brand-logo">
+                        <img src="/images/brand/4.png" alt="福勝亭 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>福勝亭</h3>
+                        <p>酥脆多汁的日式炸豬排，搭配特製醬料與高麗菜絲，經典不敗。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> B1F 生活美食家</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7661127</span>
+                        </div>
+                        <a href="tel:087327331" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- 德州小騎士 -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/5.png" alt="德州小騎士 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>德州小騎士</h3>
+                        <p>道地美式漢堡與炸雞，多樣化口味選擇，份量十足超過癮。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7661127</span>
+                        </div>
+                        <a href="tel:087327331" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- 廚咖哩 -->
+                <div class="brand-card" data-location="潮州驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/6.png" alt="廚咖哩 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>廚咖哩</h3>
+                        <p>融合日式與印度香料的特色咖哩，濃郁醬香與柔軟白飯完美契合。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 潮州驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7661127</span>
+                        </div>
+                        <a href="tel:087327331" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- 肯德基 KFC（潮州驛站 1F） -->
+                <div class="brand-card" data-location="潮州驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/7.png" alt="肯德基 KFC Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>肯德基 KFC</h3>
+                        <p>經典脆皮炸雞與香酥蛋撻，從單人套餐到多人分享餐，一次滿足速食饗宴。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 潮州驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7881230</span>
+                        </div>
+                        <a href="tel:087881230" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- 馬德里（潮州驛站 1F） -->
+                <div class="brand-card" data-location="潮州驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/8.png" alt="馬德里 餐廳 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>馬德里</h3>
+                        <p>西班牙風味小館，主打經典海鮮燉飯與各式 Tapas，小酌聚會的好去處。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 潮州驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7807168</span>
+                        </div>
+                        <a href="tel:087807168" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- 好正點（潮州驛站 1F） -->
+                <div class="brand-card" data-location="潮州驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/9.png" alt="好正點 港式點心 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>好正點</h3>
+                        <p>道地港式點心熱騰騰上桌，從鮮蝦腸粉到流沙奶皇包，每籠都正點。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 潮州驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7808658</span>
+                        </div>
+                        <a href="tel:087808658" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ==================== 以上為原有；以下為「新增：屏東驛站 1F」 ==================== -->
+
+                <!-- ★ 新增：馬德里（屏東驛站 1F） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/8.png" alt="馬德里 餐廳 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>馬德里</h3>
+                        <p>西班牙家常風味 X 海鮮燉飯與多款 Tapas，輕鬆分享的聚會選擇。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7559858</span>
+                        </div>
+                        <a href="tel:087559858" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ★ 新增：三商巧福（屏東驛站 1F） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/10.png" alt="三商巧福 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>三商巧福</h3>
+                        <p>招牌紅燒牛肉麵、滷味小菜與熱湯，快速上桌、暖胃飽足。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7511971</span>
+                        </div>
+                        <a href="tel:087511971" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ★ 新增：斑鳩的窩（屏東驛站 1F） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/11.png" alt="斑鳩的窩 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>斑鳩的窩</h3>
+                        <p>和風定食搭配酥香炸物與咖哩醬，日式家庭味的溫馨餐桌。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7513337</span>
+                        </div>
+                        <a href="tel:087513337" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ★ 新增：橫濱九田（屏東驛站 1F，拉麵） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/12.png" alt="橫濱九田 拉麵 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>橫濱九田</h3>
+                        <p>濃郁豚骨湯頭與彈牙麵條，搭配叉燒與溏心蛋，一碗到位的拉麵魂。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：暫未提供</span>
+                        </div>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ★ 新增：天擇（屏東驛站 1F） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/13.png" alt="天擇 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>天擇</h3>
+                        <p>家常料理的溫度與火候，從便當主菜到熱湯小炒，簡單也能很講究。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7529981</span>
+                        </div>
+                        <a href="tel:087529981" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ★ 新增：韓食食堂（屏東驛站 1F） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/14.png" alt="韓食食堂 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>韓食食堂</h3>
+                        <p>韓式拌飯、石鍋湯與炸雞，麻辣微甜的層次，讓人一口接一口。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7522058</span>
+                        </div>
+                        <a href="tel:087522058" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ★ 新增：丸龜製麵（屏東驛站 1F） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/15.png" alt="丸龜製麵 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>丸龜製麵</h3>
+                        <p>現點現煮讚岐烏龍麵，搭配酥脆天婦羅與小菜，客製你的完美一碗。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7515169</span>
+                        </div>
+                        <a href="tel:087515169" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+                <!-- ★ 新增：滋滋小鉄板（屏東驛站 1F） -->
+                <div class="brand-card" data-location="屏東驛站">
+                    <div class="brand-logo">
+                        <img src="/images/brand/16.png" alt="滋滋小鉄板 Logo">
+                    </div>
+                    <div class="brand-content">
+                        <h3>滋滋小鉄板</h3>
+                        <p>鐵板現炒香氣四溢，肉品、蔬菜與麵食自由搭配，熱騰騰最對味。</p>
+                        <div class="brand-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> 屏東驛站 1F</span>
+                            <span><i class="fas fa-phone"></i> TEL：08-7560007</span>
+                        </div>
+                        <a href="tel:087560007" class="btn reserve-btn">電話預約</a>
+                        <a href="#" class="btn menu-btn">參考菜單</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 位置篩選功能（沿用原邏輯）
+        document.addEventListener('DOMContentLoaded', function() {
+            const locationBtns = document.querySelectorAll('.location-btn');
+            const brandCards = document.querySelectorAll('.brand-card');
+
+            locationBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    locationBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const location = this.getAttribute('data-location');
+
+                    brandCards.forEach(card => {
+                        if (location === 'all' || card.getAttribute('data-location') === location) {
+                            card.style.display = 'flex';
+                            // 重新觸發卡片動畫（若在 brands.css 有定義）
+                            card.style.animation = 'none';
+                            setTimeout(() => { card.style.animation = ''; }, 10);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+/* /css/header.css
+   - 命名空間：.site-header（不污染內容頁）
+   - 促銷字 .promo-line：與大標左對齊、漸層文字
+   - 支援 RWD 與手機漢堡選單
+*/
+
+/* -------------------------------------------------
+   全站配色變數（不影響版面）
+-------------------------------------------------- */
+:root {
+    --primary-color: #FF8C42; /* 橘 */
+    --secondary-color: #2D7DD2; /* 藍 */
+    --accent-color: #97CC04; /* 綠 */
+    --light-color: #FFF8E8;
+    --brown-color: #5C4033;
+    --spacing-unit: 1rem;
+}
+
+/* 輕量動畫（不影響排版） */
+@keyframes gradientShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes fadeIn{
+  0%{opacity:0;transform:translateY(-10px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+/* ==================================================
+   Header（完全命名空間：.site-header）
+================================================== */
+.site-header{
+  /* 控制 logo 圖示尺寸與與標題間距，供 .promo-line 對齊用 */
+  --logo-icon-size: 40px;   /* 桌機 logo 圖示寬高 */
+  --logo-gap: .8rem;        /* 圖示與標題間距 */
+
+  background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));
+  background-size:200% 200%;
+  animation:gradientShift 10s ease infinite;
+  color:#fff;
+  padding: var(--spacing-unit) 0 1rem;   /* 底部以 promo-line 撐開 */
+  box-shadow:0 2px 10px rgba(0,0,0,.1);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.site-header::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:url('/images/pattern-wave.png') repeat-x bottom;
+  opacity:.2;
+  z-index:0;
+}
+
+/* Header 內部容器 */
+.site-header .container{
+  width:90%;
+  max-width:1200px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+
+/* 排版 */
+.site-header .header-content{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* Logo */
+.site-header .logo{
+  font-size:2rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:var(--logo-gap);
+  text-shadow:1px 1px 3px rgba(0,0,0,.3);
+  animation:fadeIn 1s ease-in-out;
+  line-height:1;
+}
+.site-header .logo .logo-icon-img{
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
+}
+
+/* 導覽 */
+.site-header nav{position:relative}
+.site-header .nav-links{
+  display:flex;
+  list-style:none;
+  align-items:center;
+  margin:0; padding:0;
+}
+.site-header .nav-links li{
+  margin-left:2rem;
+  display:flex;
+  align-items:center;
+}
+    .site-header .nav-links a {
+        color: #fff;
+        text-decoration: none; /* 去掉底線 */
+        font-weight: 350;
+        position: relative;
+        line-height: 1;
+        display: inline-block; /* ✅ 必須一開始就有 */
+        transition: color 0.3s ease;
+    }
+
+        .site-header .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .site-header .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; /* 距離文字底部 */
+            left: 50%; /* 中間對齊 */
+            transform: translateX(-50%) scaleX(0); /* 初始縮放為 0 */
+            transform-origin: center center; /* 從中間往兩邊展開 */
+            width: 100%; /* 跟文字寬度一致 */
+            height: 2px; /* 底線粗細 */
+            background: var(--primary-color);
+            transition: transform 0.3s ease; /* ✅ transition 套在 transform */
+        }
+
+        .site-header .nav-links a:hover::after,
+        .site-header .nav-links a.active::after {
+            transform: translateX(-50%) scaleX(1); /* 從中間展開到底 */
+        }
+
+
+
+/* 促銷小行（獨立元素，避免與 Logo 重疊） */
+.site-header .promo-line{
+  /* 與大標的垂直距離 */
+  margin-top:.4rem;
+
+  /* 對齊到「標題文字起點」：略過 logo 圖示寬 + 圖文間距 */
+  text-align:left;
+  margin-left: calc(var(--logo-icon-size) + var(--logo-gap));
+
+  /* 字型與漸層效果 */
+  font-size:.82rem;
+  font-weight:800;
+  line-height:1.2;
+
+  /* 單色 fallback（不支援背景裁剪時會用到） */
+  color:#ffffff;
+
+  /* 多彩漸層文字（支援瀏覽器會自動套用） */
+  background: linear-gradient(
+    90deg,
+    var(--accent-color) 0%,
+    #FFD36A 25%,
+    var(--primary-color) 55%,
+    var(--secondary-color) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
+}
+
+/* 漢堡鈕 / 登入鈕（若未使用可忽略） */
+.site-header .mobile-menu{
+  display:none;
+  font-size:1.5rem;
+  cursor:pointer;
+  background:none;
+  border:0;
+  color:#fff;
+}
+.site-header .login-btn{
+  display:flex;align-items:center;justify-content:center;
+  padding:.5rem 1rem;border:2px solid var(--accent-color);border-radius:8px;
+  background-color:transparent;color:#fff;font-weight:600;transition:all .3s ease;
+  height:2rem;line-height:1;position:relative;overflow:hidden
+}
+.site-header .login-btn::before{
+  content:'';position:absolute;inset:0;background-color:var(--accent-color);
+  opacity:0;transition:opacity .3s ease;z-index:1
+}
+.site-header .login-btn:hover{transform:translateY(-2px)}
+.site-header .login-btn:hover::before{opacity:1}
+.site-header .login-btn span{
+  position:relative;z-index:5;display:inline-block;transition:color .3s ease
+}
+.site-header .login-btn:hover span{color:var(--brown-color)}
+
+/* ================== RWD ================== */
+@media (max-width:768px){
+  .site-header .header-content{flex-direction:column;text-align:center}
+  .site-header .nav-links{margin-top:var(--spacing-unit);flex-wrap:wrap;justify-content:center}
+  .site-header .nav-links li{margin:.5rem}
+  .site-header .login-btn{padding:.4rem .8rem;font-size:.9rem;height:1.8rem}
+  .site-header .promo-line{margin-top:.5rem;font-size:.78rem}
+}
+
+@media (max-width:576px){
+  .site-header{
+    --logo-icon-size: 30px; /* 手機縮小圖示尺寸 */
+    --logo-gap: .6rem;
+  }
+
+  .site-header .header-content{
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center
+  }
+  .site-header .logo{font-size:1.5rem}
+
+  .site-header .mobile-menu{display:block}
+
+  .site-header .nav-links{
+    position:absolute;top:100%;left:0;width:100%;
+    background:linear-gradient(135deg,rgba(255,140,66,.95),rgba(45,125,210,.95));
+    flex-direction:column;text-align:center;max-height:0;opacity:0;overflow:hidden;
+    transform:translateY(-10px);
+    transition:max-height .5s ease-in-out,opacity .5s ease-in-out,transform .5s ease-in-out;
+    z-index:99;box-shadow:0 4px 15px rgba(0,0,0,.2);border-radius:0 0 10px 10px
+  }
+  .site-header .nav-links.open{max-height:500px;opacity:1;transform:translateY(0)}
+  .site-header .nav-links li{margin:1rem 0;opacity:0;transform:translateY(-10px);transition:opacity .3s ease,transform .3s ease}
+  .site-header .nav-links.open li{opacity:1;transform:translateY(0)}
+  .site-header .nav-links.open li:nth-child(1){transition-delay:.1s}
+  .site-header .nav-links.open li:nth-child(2){transition-delay:.15s}
+  .site-header .nav-links.open li:nth-child(3){transition-delay:.2s}
+  .site-header .nav-links.open li:nth-child(4){transition-delay:.25s}
+  .site-header .nav-links.open li:nth-child(5){transition-delay:.3s}
+  .site-header .nav-links.open li:nth-child(6){transition-delay:.35s}
+  .site-header .nav-links.open li:nth-child(7){transition-delay:.4s}
+  .site-header .nav-links.open li:nth-child(8){transition-delay:.45s}
+
+  .site-header .nav-links a{
+    font-size:1.05rem;
+    font-weight:600;
+    padding:.5rem 1rem;
+    border-radius:5px;
+    text-shadow:1px 1px 2px rgba(0,0,0,.3)
+  }
+  .site-header .nav-links a:hover{background-color:rgba(255,255,255,.2);color:var(--accent-color)}
+
+  .site-header .login-btn{
+    background-color:var(--accent-color);color:var(--brown-color);border:none;
+    padding:.6rem 1.2rem;font-size:1rem;box-shadow:0 2px 5px rgba(0,0,0,.2)
+  }
+  .site-header .login-btn::before{background-color:var(--brown-color)}
+  .site-header .login-btn:hover span{color:#fff}
+
+  .site-header .promo-line{font-size:.72rem;margin-top:.4rem}
+}
+
+/* =============（可選）Header 內 Modal 樣式 ============= */
+.site-header .modal{
+  display:none;position:fixed;inset:0;background-color:rgba(0,0,0,.5);z-index:1000;overflow:auto
+}
+.site-header .modal-content{
+  background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));
+  margin:15% auto;padding:2rem;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,.3);
+  width:90%;max-width:400px;color:#fff;position:relative;animation:fadeIn .3s ease-in-out
+}
+.site-header .close-btn{position:absolute;top:10px;right:15px;font-size:1.5rem;cursor:pointer;color:#fff;transition:color .3s ease}
+.site-header .close-btn:hover{color:var(--accent-color)}
+.site-header .modal-content h2{margin-bottom:1.5rem;font-size:1.5rem;text-align:center;text-shadow:1px 1px 2px rgba(0,0,0,.3)}
+.site-header .modal-content form{display:flex;flex-direction:column;gap:1rem}
+.site-header .modal-content label{font-weight:500;margin-bottom:.3rem}
+.site-header .modal-content input,
+.site-header .modal-content select{
+  padding:.5rem;border:none;border-radius:5px;font-size:1rem;background-color:rgba(255,255,255,.9);color:var(--brown-color)
+}
+.site-header .modal-content input:focus,
+.site-header .modal-content select:focus{outline:none;box-shadow:0 0 5px rgba(255,255,255,.5)}
+.site-header .login-links{display:flex;justify-content:center;gap:.5rem;margin:1rem 0}
+.site-header .login-links a{color:var(--light-color);text-decoration:none;font-size:.9rem;transition:color .3s ease}
+.site-header .login-links a:hover{color:var(--accent-color)}
+.site-header .login-links span{color:#fff}
+.site-header .submit-btn{
+  background-color:var(--accent-color);color:var(--brown-color);padding:.7rem;border:none;border-radius:5px;
+  font-size:1rem;font-weight:600;cursor:pointer;transition:background-color .3s ease,transform .3s ease
+}
+.site-header .submit-btn:hover{background-color:var(--brown-color);color:#fff;transform:translateY(-2px)}

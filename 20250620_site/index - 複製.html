@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>屏東太平洋百貨 - 您的南國購物天堂</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 導航欄 -->
+    <div id="header-container"></div>
+
+    <!-- 主內容 -->
+    <main>
+        <div id="carousel-container"></div>
+        <div id="main-content-container"></div>
+        <div id="products-container"></div>
+        <div id="local-container"></div>
+        <div id="events-container"></div>
+    </main>
+
+    <!-- 頁尾 -->
+    <div id="footer-container"></div>
+
+    <!-- 報名表單蓋板 -->
+    <div id="registration-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2 id="modal-event-title"></h2>
+            <form id="registration-form">
+                <label for="name">姓名:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">電話:</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
+
+                <label for="gender">性別:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">請選擇</option>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+
+                <label for="birthdate">出生年月日:</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+
+                <button type="submit" class="btn submit-btn">送出</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 登入表單蓋板 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>會員登入</h2>
+            <form id="login-form">
+                <label for="username">帳號:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">密碼:</label>
+                <input type="password" id="password" name="password" required>
+
+                <div class="login-links">
+                    <a href="#" class="register-link">加入會員</a>
+                    <span>|</span>
+                    <a href="#" class="forgot-password-link">忘記密碼</a>
+                </div>
+
+                <button type="submit" class="btn submit-btn">登入</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'926cfbfe3bee677d',t:'MTc0MzA1ODU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
