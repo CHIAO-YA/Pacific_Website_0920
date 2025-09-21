@@ -1,0 +1,285 @@
+﻿<!--<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE Pay 報名系統測試</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+
+            button:hover {
+                background-color: #218838;
+            }
+
+            button:disabled {
+                background-color: #6c757d;
+                cursor: not-allowed;
+            }
+
+        .update-btn {
+            background-color: #007bff;
+        }
+
+            .update-btn:hover {
+                background-color: #0056b3;
+            }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .api-url {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+            .api-url input {
+                margin-top: 5px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LINE Pay 報名系統測試</h1>-->
+
+        <!-- API URL 設定 -->
+        <!--<div class="api-url">
+            <label for="apiUrl">API 網址：</label>
+            <input type="text" id="apiUrl" placeholder="請貼上你的 Google Apps Script API 網址">
+        </div>-->
+
+        <!-- 報名表單 -->
+        <!--<form id="registrationForm">
+            <div class="form-group">
+                <label for="name">姓名：</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">手機：</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">信箱：</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">性別：</label>
+                <select id="gender" required>
+                    <option value="">請選擇</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="birthday">生日：</label>
+                <input type="date" id="birthday" required>
+            </div>
+
+            <button type="submit">送出報名</button>
+        </form>-->
+
+        <!-- 更新付款狀態測試 -->
+        <!--<div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
+            <h3>測試付款狀態更新</h3>
+            <div class="form-group">
+                <label for="updatePhone">手機號碼：</label>
+                <input type="tel" id="updatePhone" placeholder="輸入要更新的手機號碼">
+            </div>
+            <button type="button" class="update-btn" onclick="updatePaymentStatus()">模擬付款成功</button>
+        </div>-->
+
+        <!-- 查看所有資料 -->
+        <!--<div style="margin-top: 20px;">
+            <button type="button" onclick="getAllData()">查看所有報名資料</button>
+        </div>-->
+
+        <!-- 結果顯示 -->
+        <!--<div id="result"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const resultDiv = document.getElementById('result');
+
+        // 提交報名表單
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const apiUrl = document.getElementById('apiUrl').value.trim();
+            if (!apiUrl) {
+                showResult('請先輸入 API 網址', 'error');
+                return;
+            }
+
+            const formData = {
+                action: 'register',
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                gender: document.getElementById('gender').value,
+                birthday: document.getElementById('birthday').value
+            };
+
+            try {
+                showResult('正在提交報名資料...', 'info');
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+                showResult(JSON.stringify(result, null, 2), result.statusCode === 200 ? 'success' : 'error');
+
+                if (result.statusCode === 200) {
+                    form.reset();
+                }
+            } catch (error) {
+                showResult('錯誤: ' + error.message, 'error');
+            }
+        });
+
+        // 更新付款狀態
+        async function updatePaymentStatus() {
+            const apiUrl = document.getElementById('apiUrl').value.trim();
+            const phone = document.getElementById('updatePhone').value.trim();
+
+            if (!apiUrl || !phone) {
+                showResult('請輸入 API 網址和手機號碼', 'error');
+                return;
+            }
+
+            const updateData = {
+                action: 'updatePayment',
+                phone: phone
+            };
+
+            try {
+                showResult('正在更新付款狀態...', 'info');
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify(updateData)
+                });
+
+                const result = await response.json();
+                showResult(JSON.stringify(result, null, 2), result.statusCode === 200 ? 'success' : 'error');
+            } catch (error) {
+                showResult('錯誤: ' + error.message, 'error');
+            }
+        }
+
+        // 查看所有資料
+        async function getAllData() {
+            const apiUrl = document.getElementById('apiUrl').value.trim();
+            if (!apiUrl) {
+                showResult('請先輸入 API 網址', 'error');
+                return;
+            }
+
+            try {
+                showResult('正在載入資料...', 'info');
+
+                const response = await fetch(apiUrl + '?action=getAllData');
+                const result = await response.json();
+                showResult(JSON.stringify(result, null, 2), result.statusCode === 200 ? 'success' : 'error');
+            } catch (error) {
+                showResult('錯誤: ' + error.message, 'error');
+            }
+        }
+
+        // 顯示結果
+        function showResult(message, type) {
+            resultDiv.innerHTML = message;
+            resultDiv.className = `result ${type}`;
+        }
+    </script>
+</body>
+</html>-->

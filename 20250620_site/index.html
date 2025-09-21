@@ -75,13 +75,13 @@
     </div>
 
 
-    <!-- 報名表單蓋板（新版） -->
+    <!-- 報名表單蓋板（第一頁） -->
     <div id="registration-modal" class="modal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-event-title">
             <span class="close-btn" aria-label="關閉">×</span>
             <h2 id="modal-event-title">活動報名</h2>
 
-            <form id="registration-form" novalidate>
+            <form id="registration-form">
                 <!-- 並排：姓名＋手機 -->
                 <div class="form-row">
                     <div class="field">
@@ -96,14 +96,18 @@
                                name="phone"
                                inputmode="numeric"
                                placeholder="0912345678"
-                               pattern="^09\\d{8}$"
+                               pattern="^09\d{8}$"
                                title="請輸入 09 開頭的 10 碼手機號碼（例如：0912345678）"
                                required />
                         <small class="hint">格式：09 開頭，共 10 碼</small>
                     </div>
                 </div>
 
-                <!-- 其餘欄位 -->
+                <div class="field">
+                    <label for="email">信箱：</label>
+                    <input type="email" id="email" name="email" placeholder="example@mail.com" required />
+                </div>
+
                 <div class="field">
                     <label for="gender">性別：</label>
                     <select id="gender" name="gender" required>
@@ -118,10 +122,59 @@
                     <input type="date" id="birthdate" name="birthdate" required />
                 </div>
 
+                <div class="field">
+                    <label>選擇活動：</label>
+                    <div id="registration-events-container">
+                        <div style="text-align: center; color: #888;">載入中...</div>
+                    </div>
+                </div>
+
                 <div class="form-actions">
                     <button type="submit" class="btn submit-btn">送出</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <!-- 報名表單蓋板（第二頁） -->
+    <div id="confirmation-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="confirmation-title">
+            <span class="close-btn" aria-label="關閉">×</span>
+            <h2 id="confirmation-title">確認資料</h2>
+
+            <div class="confirmation-summary">
+                <div class="data-row">
+                    <span class="data-label">姓名：</span>
+                    <span class="data-value" id="confirm-name"></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">手機：</span>
+                    <span class="data-value" id="confirm-phone"></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">信箱：</span>
+                    <span class="data-value" id="confirm-email"></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">性別：</span>
+                    <span class="data-value" id="confirm-gender"></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">出生年月日：</span>
+                    <span class="data-value" id="confirm-birthdate"></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">活動名稱：</span>
+                    <span class="data-value" id="confirm-event-name"></span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">費用：</span>
+                    <span class="data-value" id="confirm-event-price"></span>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn checkout-btn" onclick="proceedToCheckout()">結帳</button>
+            </div>
         </div>
     </div>
 
@@ -154,6 +207,10 @@
 
     <!-- 開/關報名蓋板 + 手機欄位輸入限制（新） -->
     <script>
+        // 全域變數
+        let eventsData = null;
+        let selectedEventData = null;
+
         (function () {
             const modal = document.getElementById('registration-modal');
             if (!modal) return;
@@ -239,23 +296,177 @@
                 }
             });
 
-            // 手機欄位：僅允許數字、最長 10 碼；送出前再驗證一次
+            // 手機欄位：僅允許數字、最長 10 碼
             document.addEventListener('input', (e) => {
                 if (e.target && e.target.id === 'phone') {
                     e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
                 }
             });
-            const regForm = document.getElementById('registration-form');
-            if (regForm) {
-                regForm.addEventListener('submit', (e) => {
-                    const tel = document.getElementById('phone');
-                    if (!/^09\d{8}$/.test(tel.value)) {
-                        tel.reportValidity();
-                        e.preventDefault();
+        })();
+
+        // 載入並顯示活動選項
+        async function loadAndShowEvents() {
+            try {
+                const response = await fetch('/data/events/活動.json');
+                eventsData = await response.json();
+
+                let html = '';
+                eventsData.events.forEach(event => {
+                    if (event.active) {
+                        html += `
+                            <div>
+                                <input type="radio" name="selectedEvent" value="${event.id}" id="${event.id}" 
+                                       data-event='${JSON.stringify(event)}' required>
+                                <label for="${event.id}">${event.event_name} - ${event.priceText}</label>
+                            </div>
+                        `;
                     }
                 });
+
+                document.getElementById('registration-events-container').innerHTML = html;
+
+                // 監聽活動選擇變化
+                document.querySelectorAll('input[name="selectedEvent"]').forEach(radio => {
+                    radio.addEventListener('change', function () {
+                        if (this.checked) {
+                            selectedEventData = JSON.parse(this.dataset.event);
+                            console.log('選擇的活動:', selectedEventData);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error('載入活動失敗:', error);
+                document.getElementById('registration-events-container').innerHTML = '<div style="color: red;">載入活動失敗</div>';
             }
-        })();
+        }
+
+        // 開啟報名表單時載入活動
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.register-btn')) {
+                e.preventDefault();
+                document.getElementById('registration-modal').setAttribute('aria-hidden', 'false');
+                loadAndShowEvents();
+            }
+        });
+
+        // 表單提交處理
+        document.addEventListener('DOMContentLoaded', function () {
+            const regForm = document.getElementById('registration-form');
+            const regModal = document.getElementById('registration-modal');
+            const confirmModal = document.getElementById('confirmation-modal');
+
+            if (!regForm || !confirmModal) return;
+
+            // 攔截表單提交
+            regForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // 確認有選擇活動
+                if (!selectedEventData) {
+                    alert('請選擇一個活動');
+                    return;
+                }
+
+                // 取得表單資料
+                const formData = new FormData(this);
+                const data = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    gender: formData.get('gender'),
+                    birthdate: formData.get('birthdate'),
+                    eventData: selectedEventData
+                };
+
+                fillConfirmData(data);
+
+                regModal.setAttribute('aria-hidden', 'true');
+                confirmModal.setAttribute('aria-hidden', 'false');
+            });
+
+            // 填入確認資料
+            function fillConfirmData(data) {
+                document.getElementById('confirm-name').textContent = data.name || '';
+                document.getElementById('confirm-phone').textContent = data.phone || '';
+                document.getElementById('confirm-email').textContent = data.email || '';
+                document.getElementById('confirm-gender').textContent = data.gender === 'male' ? '男' : data.gender === 'female' ? '女' : '';
+                document.getElementById('confirm-birthdate').textContent = formatDate(data.birthdate) || '';
+                document.getElementById('confirm-event-name').textContent = data.eventData.event_name || '';
+                document.getElementById('confirm-event-price').textContent = data.eventData.priceText || '';
+            }
+
+            // 格式化日期
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                const date = new Date(dateStr);
+                return `${date.getFullYear()}年${(date.getMonth() + 1).toString().padStart(2, '0')}月${date.getDate().toString().padStart(2, '0')}日`;
+            }
+
+            // 確認頁面的關閉按鈕
+            const confirmCloseBtn = confirmModal.querySelector('.close-btn');
+            if (confirmCloseBtn) {
+                confirmCloseBtn.addEventListener('click', function () {
+                    confirmModal.setAttribute('aria-hidden', 'true');
+                    document.body.classList.remove('modal-open');
+                    document.body.style.top = '';
+                });
+            }
+        });
+
+        // 結帳函數
+        function proceedToCheckout() {
+            if (!selectedEventData) {
+                alert('活動資料遺失，請重新選擇');
+                return;
+            }
+
+            // 準備傳送的資料
+            const data = {
+                action: 'register',
+                name: document.getElementById('confirm-name').textContent,
+                phone: document.getElementById('confirm-phone').textContent,
+                email: document.getElementById('confirm-email').textContent,
+                gender: document.getElementById('confirm-gender').textContent,
+                birthdate: document.getElementById('confirm-birthdate').textContent,
+                id: selectedEventData.id,
+                event_name: selectedEventData.event_name,
+                price: selectedEventData.price,
+                priceText: selectedEventData.priceText
+            };
+
+            console.log('準備發送的資料:', data);
+
+            // 送出到 Google Apps Script Web App
+            fetch('https://script.google.com/macros/s/AKfycbzQn7y-PaksYiAEWxSDXfmwqGseBAJDe3saOX4I0quaLJqAZO1Pv48heCwYDy4uadhJ/exec', {                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('回應結果:', result);
+                    if (result.statusCode === 200) {
+                        alert('報名成功！資料已儲存。');
+                    } else {
+                        alert('報名失敗：' + (result.body?.error || '未知錯誤'));
+                    }
+                    closeAllModals();
+                })
+                .catch(err => {
+                    console.error('發送錯誤:', err);
+                    alert('網路錯誤，請檢查連線後重試。');
+                });
+        }
+
+        // 關閉所有蓋板
+        function closeAllModals() {
+            document.getElementById('confirmation-modal').setAttribute('aria-hidden', 'true');
+            document.getElementById('registration-modal').setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            document.body.style.top = '';
+        }
     </script>
 </body>
 </html>

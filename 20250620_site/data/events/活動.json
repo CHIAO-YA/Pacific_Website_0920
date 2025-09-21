@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "id": "01",
+      "event_name": "新鮮人基礎保養教學",
+      "price": 0,
+      "priceText": "免費",
+      "active": true
+    },
+    {
+      "id": "02",
+      "event_name": "山丘生態瓶DIY",
+      "price": 400,
+      "priceText": "400元",
+      "active": true
+    },
+    {
+      "id": "03",
+      "event_name": "山丘生態瓶DIY",
+      "price": 300,
+      "priceText": "300元兒童卡優惠",
+      "active": true
+    }
+  ]
+}

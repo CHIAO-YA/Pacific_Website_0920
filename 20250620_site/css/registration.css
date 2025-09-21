@@ -105,3 +105,202 @@ body.modal-open{ position:fixed; width:100%; overflow:hidden; }
   #registration-modal .form-row{ grid-template-columns:1fr; }
   #registration-modal .modal-content{ padding:18px; border-radius:14px; margin: 6vh 12px; }
 }
+
+/* 確認頁面樣式 */
+#confirmation-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    background: rgba(0,0,0,.45);
+    contain: layout paint style;
+    will-change: opacity;
+}
+
+    #confirmation-modal[aria-hidden="true"] {
+        display: none;
+    }
+
+    #confirmation-modal[aria-hidden="false"] {
+        display: block;
+    }
+
+    #confirmation-modal .modal-content {
+        position: relative;
+        background: rgba(255,255,255,.95);
+        border-radius: 16px;
+        box-shadow: 0 12px 36px rgba(0,0,0,.18);
+        padding: 22px;
+        max-width: 640px;
+        margin: 8vh auto;
+        color: var(--ink);
+        transform: translateZ(0);
+    }
+
+    #confirmation-modal .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f0f0;
+        color: #333;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #e6e6e6;
+        font-weight: 900;
+    }
+
+        #confirmation-modal .close-btn:hover {
+            background: #e9e9e9;
+        }
+
+.confirmation-summary {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 4px solid var(--accent, #FF8C42);
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+    .data-row:last-child {
+        border-bottom: none;
+    }
+
+.data-label {
+    font-weight: 600;
+    color: var(--ink, #333);
+    min-width: 100px;
+}
+
+.data-value {
+    color: var(--ink, #333);
+    flex: 1;
+    text-align: right;
+}
+
+#confirmation-modal .form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#confirmation-modal .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.edit-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+    .edit-btn:hover {
+        background-color: #5a6268;
+    }
+
+.checkout-btn {
+    background-color: var(--accent, #FF8C42);
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 32px;
+}
+
+    .checkout-btn:hover {
+        background-color: #e67e32;
+    }
+
+@media (max-width: 640px) {
+    #confirmation-modal .modal-content {
+        padding: 18px;
+        border-radius: 14px;
+        margin: 6vh 12px;
+    }
+
+    #confirmation-modal .form-actions {
+        flex-direction: column;
+    }
+
+    .data-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .data-value {
+        text-align: left;
+    }
+}
+/* 活動選項樣式 */
+#registration-events-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    #registration-events-container > div {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--field-bg);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+        #registration-events-container > div:hover {
+            border-color: var(--accent);
+            background: #fff;
+        }
+
+    /* ====== 客製化 radio ====== */
+    #registration-events-container input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        margin-right: 12px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+    }
+
+        /* 選取後整顆填滿 */
+        #registration-events-container input[type="radio"]:checked {
+            background: var(--accent);
+        }
+
+    /* ====== 標籤 ====== */
+    #registration-events-container label {
+        cursor: pointer;
+        font-weight: normal;
+        margin: 0;
+        flex: 1;
+    }
+
+    #registration-events-container input[type="radio"]:checked + label {
+        font-weight: 600;
+        color: var(--accent);
+    }
