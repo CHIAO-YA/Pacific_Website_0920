@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>屏東太平洋百貨 - 您的南國購物天堂</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>屏東太平洋百貨 - 您的南國購物天堂</title>
 
-  <!-- 站內樣式（既有） -->
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/header.css" />
-  <!-- 報名表專用樣式（新） -->
-  <link rel="stylesheet" href="css/registration.css" />
+    <!-- 站內樣式（既有） -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <!-- 報名表專用樣式（新） -->
+    <link rel="stylesheet" href="css/registration.css" />
 
-  <!-- 圖示 & 字型（如原站使用） -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <!-- 圖示 & 字型（如原站使用） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
 </head>
 <body>
@@ -62,9 +62,15 @@
             <p class="time">活動時間：2025/09/01 ~ 2025/09/30</p>
 
             <!-- 商品資訊 -->
-            <p><strong>【商品內容】</strong> - 蛋黃酥 x 8顆</p>
-            <p><strong>【保存效期】</strong> - 常溫保存，10天</p>
-            <p><strong>【注意事項】</strong></p>
+            <p>
+                <strong>【商品內容】</strong> - 蛋黃酥 x 8顆
+            </p>
+            <p>
+                <strong>【保存效期】</strong> - 常溫保存，10天
+            </p>
+            <p>
+                <strong>【注意事項】</strong>
+            </p>
             <ul>
                 <li>蛋奶素</li>
                 <li>勿放置悶熱&日曬處</li>
@@ -314,12 +320,12 @@
                 eventsData.events.forEach(event => {
                     if (event.active) {
                         html += `
-                            <div>
-                                <input type="radio" name="selectedEvent" value="${event.id}" id="${event.id}" 
-                                       data-event='${JSON.stringify(event)}' required>
-                                <label for="${event.id}">${event.event_name} - ${event.priceText}</label>
-                            </div>
-                        `;
+                                    <div>
+                                        <input type="radio" name="selectedEvent" value="${event.id}" id="${event.id}"
+                                               data-event='${JSON.stringify(event)}' required>
+                                        <label for="${event.id}">${event.event_name} - ${event.priceText}</label>
+                                    </div>
+                                `;
                     }
                 });
 
@@ -414,20 +420,24 @@
             }
         });
 
-        // 結帳函數
+        // 結帳
         function proceedToCheckout() {
             if (!selectedEventData) {
                 alert('活動資料遺失，請重新選擇');
                 return;
             }
 
-            // 準備傳送的資料
+            // 收集並修正資料格式
+            let gender = document.getElementById('confirm-gender').textContent;
+            if (gender === '男') gender = 'male';
+            if (gender === '女') gender = 'female';
+
             const data = {
                 action: 'register',
                 name: document.getElementById('confirm-name').textContent,
                 phone: document.getElementById('confirm-phone').textContent,
                 email: document.getElementById('confirm-email').textContent,
-                gender: document.getElementById('confirm-gender').textContent,
+                gender: gender,  // 使用修正後的性別值
                 birthdate: document.getElementById('confirm-birthdate').textContent,
                 id: selectedEventData.id,
                 event_name: selectedEventData.event_name,
@@ -436,9 +446,11 @@
             };
 
             console.log('準備發送的資料:', data);
+            showLoadingMessage('正在處理中請稍後...');
 
-            // 送出到 Google Apps Script Web App
-            fetch('https://script.google.com/macros/s/AKfycbzQn7y-PaksYiAEWxSDXfmwqGseBAJDe3saOX4I0quaLJqAZO1Pv48heCwYDy4uadhJ/exec', {                method: 'POST',
+            // 統一發送報名資料
+            fetch('https://script.google.com/macros/s/AKfycbxBgDhAy2Wx7xs8iLcxeqHtWYv29YIiyT9SG6uYNHrmQICHuGnrVMTgWgW0WqAE0e1p/exec', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'text/plain'
                 },
@@ -447,19 +459,118 @@
                 .then(response => response.json())
                 .then(result => {
                     console.log('回應結果:', result);
-                    if (result.statusCode === 200) {
-                        alert('報名成功！資料已儲存。');
+
+                    if (result.statusCode === 200 && result.body.success) {
+                        if (selectedEventData.price === 0) {
+                            // 免費活動：直接完成
+                            hideLoadingMessage();
+                            alert('免費活動報名成功！');
+                            closeAllModals();
+                        } else {
+                            // 付費活動：進入 LINE Pay 流程
+                            const orderId = result.body.data.order_id;
+                            console.log('報名記錄建立成功，Order ID:', orderId);
+                            initiateLinePayment(data, orderId);
+                        }
                     } else {
+                        hideLoadingMessage();
                         alert('報名失敗：' + (result.body?.error || '未知錯誤'));
                     }
-                    closeAllModals();
                 })
                 .catch(err => {
                     console.error('發送錯誤:', err);
+                    hideLoadingMessage();
                     alert('網路錯誤，請檢查連線後重試。');
                 });
         }
 
+        // 載入訊息函數（移到外面）
+        function showLoadingMessage(message) {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loading-overlay';
+            loadingDiv.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7); display: flex; justify-content: center;
+        align-items: center; z-index: 10000; color: white; font-size: 18px;
+    `;
+            loadingDiv.innerHTML = `
+        <div style="text-align: center;">
+            <div style="margin-bottom: 15px;">⏳</div>
+            <div id="loading-text">${message}</div>
+        </div>
+    `;
+            document.body.appendChild(loadingDiv);
+        }
+
+        function updateLoadingMessage(message) {
+            const loadingText = document.getElementById('loading-text');
+            if (loadingText) {
+                loadingText.textContent = message;
+            }
+        }
+
+        function hideLoadingMessage() {
+            const loadingDiv = document.getElementById('loading-overlay');
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+        }
+
+
+        // LINE Pay 付款流程
+        function initiateLinePayment(eventData, orderId) {
+            updateLoadingMessage('正在準備付款...');
+
+            const linePayData = {
+                action: 'linepay_request',
+                order_id: orderId,
+                amount: eventData.price,
+                event_name: eventData.event_name
+            };
+
+            console.log('準備發送 LINE Pay 請求:', linePayData);
+
+            fetch('https://script.google.com/macros/s/AKfycbxBgDhAy2Wx7xs8iLcxeqHtWYv29YIiyT9SG6uYNHrmQICHuGnrVMTgWgW0WqAE0e1p/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: JSON.stringify(linePayData)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('LINE Pay 請求結果:', result);
+                    hideLoadingMessage();
+
+                    if (result.statusCode === 200 && result.body?.data) {
+                        const paymentUrl = result.body.paymentUrl || 'https://sandbox-pay.line.me/web/v3/payments/dummy-transaction-id/checkout'; // fallback 測試
+                        const transactionId = result.body.transactionId || 'dummyTxId';
+
+                        // 儲存交易資訊
+                        localStorage.setItem('linepay_transaction', JSON.stringify({
+                            transactionId: transactionId,
+                            orderId: orderId,
+                            amount: eventData.price,
+                            eventName: eventData.event_name
+                        }));
+
+                        alert('報名記錄已建立，即將導向 LINE Pay 付款頁面...');
+                        closeAllModals();
+
+                        setTimeout(() => {
+                            window.location.href = paymentUrl;
+                        }, 1000);
+
+                    } else {
+                        alert('LINE Pay 請求失敗：' + (result.body?.error || '未知錯誤'));
+                    }
+                })
+                .catch(error => {
+                    console.error('LINE Pay 請求錯誤:', error);
+                    hideLoadingMessage();
+                    alert('付款請求失敗，請檢查連線後重試。');
+                });
+        }
         // 關閉所有蓋板
         function closeAllModals() {
             document.getElementById('confirmation-modal').setAttribute('aria-hidden', 'true');
@@ -467,6 +578,45 @@
             document.body.classList.remove('modal-open');
             document.body.style.top = '';
         }
+
+        // 顯示付款完成訊息
+        function showPaymentCompleteMessage() {
+            const completeDiv = document.createElement('div');
+            completeDiv.id = 'payment-complete-overlay';
+            completeDiv.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7); display: flex; justify-content: center;
+        align-items: center; z-index: 10000; color: white; font-size: 18px;
+    `;
+            completeDiv.innerHTML = `
+        <div style="text-align: center;">
+            <div style="margin-bottom: 15px;">✅</div>
+            <div>已完成付款</div>
+        </div>
+    `;
+            document.body.appendChild(completeDiv);
+
+            // 3秒後自動關閉
+            setTimeout(() => {
+                completeDiv.remove();
+            }, 3000);
+        }
+
+        // 頁面載入時檢查是否從 LINE Pay 回來
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const transactionId = urlParams.get('transactionId');
+
+            if (transactionId) {
+                // 顯示付款完成訊息
+                showPaymentCompleteMessage();
+
+                // 清除 URL 參數
+                setTimeout(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }, 100);
+            }
+        });
     </script>
 </body>
 </html>
